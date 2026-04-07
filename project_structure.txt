@@ -1,0 +1,9 @@
+.
+├── .gitignore
+├── .python-version
+├── project_structure.txt
+├── pyproject.toml
+├── README.md
+└── technical_test_agent_builder_ai.md
+
+1 directory, 6 files
