@@ -1,0 +1,113 @@
+[
+  {
+    "id": 1,
+    "user": "Marie_Dupont",
+    "comment": "We need role-based permissions because managing access across large teams is risky right now. Admin control is not granular enough.",
+    "type": "feature_request",
+    "feature": "role-based permissions",
+    "sentiment": "negative",
+    "user_story": "As an admin, I want to define granular roles and permissions so that users only access what they are allowed to."
+  },
+  {
+    "id": 2,
+    "user": "Lucas_Martin",
+    "comment": "Permission management is too basic. We can’t assign different access levels to different team members.",
+    "type": "feature_request",
+    "feature": "role-based permissions",
+    "sentiment": "negative",
+    "user_story": "As an admin, I want to define granular roles and permissions so that users only access what they are allowed to."
+  },
+  {
+    "id": 3,
+    "user": "Sophie_Leroy",
+    "comment": "We need more advanced user roles. Right now everyone has too many permissions by default.",
+    "type": "feature_request",
+    "feature": "role-based permissions",
+    "sentiment": "negative",
+    "user_story": "As an admin, I want to define granular roles and permissions so that users only access what they are allowed to."
+  },
+
+  {
+    "id": 4,
+    "user": "Thomas_Bernard",
+    "comment": "The search feature is frustrating. It’s hard to find old tasks, especially in large projects.",
+    "type": "improvement",
+    "feature": "search",
+    "sentiment": "negative",
+    "user_story": "As a project manager, I want to quickly find tasks using an efficient search with filters so that I don’t waste time navigating large projects."
+  },
+  {
+    "id": 5,
+    "user": "Camille_Roux",
+    "comment": "Search needs better filtering options. We can’t easily locate tasks by status or date.",
+    "type": "improvement",
+    "feature": "search",
+    "sentiment": "negative",
+    "user_story": "As a project manager, I want to quickly find tasks using an efficient search with filters so that I don’t waste time navigating large projects."
+  },
+  {
+    "id": 6,
+    "user": "Nicolas_Faure",
+    "comment": "Finding information is too slow. The search tool doesn’t return relevant results most of the time.",
+    "type": "improvement",
+    "feature": "search",
+    "sentiment": "negative",
+    "user_story": "As a project manager, I want to quickly find tasks using an efficient search with filters so that I don’t waste time navigating large projects."
+  },
+
+  {
+    "id": 7,
+    "user": "Julie_Moreau",
+    "comment": "The app has performance issues when handling large projects. It becomes slow and unresponsive.",
+    "type": "bug",
+    "feature": "performance",
+    "sentiment": "negative",
+    "user_story": "As a user managing large projects, I want the application to remain fast and responsive so that I can work efficiently without delays."
+  },
+  {
+    "id": 8,
+    "user": "Antoine_Girard",
+    "comment": "We experience major slowdowns when there are too many tasks loaded at once.",
+    "type": "bug",
+    "feature": "performance",
+    "sentiment": "negative",
+    "user_story": "As a user managing large projects, I want the application to remain fast and responsive so that I can work efficiently without delays."
+  },
+  {
+    "id": 9,
+    "user": "Laura_Andre",
+    "comment": "The platform lags a lot during heavy usage. Performance needs serious improvement.",
+    "type": "bug",
+    "feature": "performance",
+    "sentiment": "negative",
+    "user_story": "As a user managing large projects, I want the application to remain fast and responsive so that I can work efficiently without delays."
+  },
+
+  {
+    "id": 10,
+    "user": "David_Lambert",
+    "comment": "The onboarding experience is confusing. It takes too long to understand how to set up projects.",
+    "type": "ux_issue",
+    "feature": "onboarding",
+    "sentiment": "negative",
+    "user_story": "As a new user, I want a clear and guided onboarding experience so that I can quickly understand how to use the platform."
+  },
+  {
+    "id": 11,
+    "user": "Emma_Bonnet",
+    "comment": "Getting started is not intuitive. We struggled to understand the workflow at the beginning.",
+    "type": "ux_issue",
+    "feature": "onboarding",
+    "sentiment": "negative",
+    "user_story": "As a new user, I want a clear and guided onboarding experience so that I can quickly understand how to use the platform."
+  },
+  {
+    "id": 12,
+    "user": "Paul_Francois",
+    "comment": "The onboarding process lacks guidance. New users don’t know what to do first.",
+    "type": "ux_issue",
+    "feature": "onboarding",
+    "sentiment": "negative",
+    "user_story": "As a new user, I want a clear and guided onboarding experience so that I can quickly understand how to use the platform."
+  }
+]
