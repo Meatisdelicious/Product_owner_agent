@@ -1,9 +1,31 @@
 .
+├── 1_Data
+│   ├── agent_1_dataset.json
+│   └── agent_2.1_dataset.json
+├── 2_documentation
+│   └── usefull_commands.py
+├── src
+│   └── user_story_generator_agent
+│       ├── api
+│       ├── context
+│       │   └── evaluation_criterias.py
+│       ├── services
+│       │   ├── __init__.py
+│       │   ├── evaluation.py
+│       │   └── extractor.py
+│       └── __init__.py
+├── tests
+│   └── run_extractor.py
+├── .env
 ├── .gitignore
 ├── .python-version
+├── agent_1_architecture.md
+├── agent_2_architecture.md
+├── project_architecture.md
+├── project_specifications.md
 ├── project_structure.txt
 ├── pyproject.toml
-├── README.md
-└── technical_test_agent_builder_ai.md
+├── technical_test_agent_builder_ai.md
+└── uv.lock
 
-1 directory, 6 files
+9 directories, 20 files
