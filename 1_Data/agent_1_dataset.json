@@ -1,0 +1,35 @@
+[
+  {
+    "id": 1,
+    "input": {
+      "user": "Marie_Dupont",
+      "comment": "We need role-based permissions because managing access across large teams is risky right now. Admin control is not granular enough."
+    },
+    "expected_output": {
+      "feature_type": "feature_request",
+      "feature": "role-based permissions"
+    }
+  },
+  {
+    "id": 2,
+    "input": {
+      "user": "Jean_Jaques",
+      "comment": "The Jira integration fails randomly and tasks are not syncing properly."
+    },
+    "expected_output": {
+      "feature_type": "bug_report",
+      "feature": "fix Jira integration sync issues"
+    }
+  },
+  {
+    "id": 3,
+    "input": {
+      "user": "Alex_Bourgeois",
+      "comment": "The search feature is frustrating. It’s hard to find old tasks in large projects."
+    },
+    "expected_output": {
+      "feature_type": "improvement",
+      "feature": "improve search and filtering"
+    }
+  }
+]
