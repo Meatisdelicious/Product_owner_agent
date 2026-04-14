@@ -9,7 +9,7 @@ from typing import Any, Literal
 from langchain_core.prompts import ChatPromptTemplate
 from pydantic import BaseModel, Field
 
-from user_story_generator_agent.context.evaluation_criterias import (
+from user_story_generator_agent.context.criterias import (
     IMPACT_CRITERIA,
     URGENCY_CRITERIA,
 )
