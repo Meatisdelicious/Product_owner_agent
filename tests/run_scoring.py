@@ -12,7 +12,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 SRC_PATH = PROJECT_ROOT / "src"
 sys.path.insert(0, str(SRC_PATH))
 
-from user_story_generator_agent.services.scoring import (  # noqa: E402
+from user_story_generator_agent.services.scoring import ( 
     get_scoring_dataset_item,
     score_feature_from_dataset,
 )
@@ -20,7 +20,7 @@ from user_story_generator_agent.services.scoring import (  # noqa: E402
 
 if __name__ == "__main__":
     dataset_item = get_scoring_dataset_item(
-        comment_id=2,
+        comment_id=3,
         dataset_path=PROJECT_ROOT / "1_Data" / "agent_2.2_dataset.json",
     )
     result = score_feature_from_dataset(
