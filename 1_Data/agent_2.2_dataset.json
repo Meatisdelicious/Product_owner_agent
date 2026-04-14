@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "input": {
+      "user": "Marie_Dupont",
+      "comment": "We need role-based permissions because managing access across large teams is risky right now. Admin control is not granular enough.",
+      "feature_type": "feature_request",
+      "feature": "role-based permissions",
+      "impact": 5,
+      "urgency": 4
+    },
+    "expected_output": {
+      "impact_justification":"Affects core access control across large teams, with strong implications for security and scalability.",
+      "urgency_justification": "Represents an immediate risk in current operations, potentially leading to access control issues or misuse."
+    }
+  },
+  {
+    "id": 2,
+    "input": {
+      "user": "Jean_Jaques",
+      "comment": "The Jira integration fails randomly and tasks are not syncing properly.",
+      "feature_type": "bug_report",
+      "feature": "fix Jira integration sync issues",
+      "impact": 4,
+      "urgency": 4
+    },
+    "expected_output": {
+      "impact_justification": "Breaks coordination between systems and disrupts task tracking, which has a major effect on workflow reliability.",
+      "urgency_justification": "The issue occurs in current usage and affects ongoing work, so it requires near-term action to prevent repeated operational disruption."
+    }
+  },
+  {
+    "id": 3,
+    "input": {
+      "user": "Alex_Bourgeois",
+      "comment": "The search feature is frustrating. It’s hard to find old tasks in large projects.",
+      "feature_type": "improvement",
+      "feature": "improve search and filtering",
+      "impact": 4,
+      "urgency": 3
+    },
+    "expected_output": {
+      "impact_justification": "Search is a key workflow feature, and poor retrieval in large projects creates significant inefficiency for users.",
+      "urgency_justification": "The problem is recurring and reduces productivity, but it does not appear to block core functionality immediately."
+    }
+  }
+]
