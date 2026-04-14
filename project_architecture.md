@@ -16,7 +16,7 @@ Input:
 - feature_type
 - feature
 
-Output 1: 
+output 1: 
 - impact                               (input_context : comment + feature_type + feature + impact_criteria) 
 - urgency                              (input_context : comment + feature_type + feature + urgency_criteria) 
 

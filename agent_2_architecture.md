@@ -58,4 +58,6 @@ output_example :
   "impact_justification":"Affects core access control across large teams, with strong implications for security and scalability.",
   "urgency_justification": "Represents an immediate risk in current operations, potentially leading to access control issues or misuse.",
   "feature_priority_score": 4.4
+  "moscow_category_result": "Should have",
+  "feature_recommendation_justification": "This feature should be prioritized as a Should have because it has strong access control and security implications, with a high priority score driven by major impact and near-term urgency."
 },
