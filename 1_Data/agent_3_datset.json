@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "input": {
+      "user": "Marie_Dupont",
+      "comment": "We need role-based permissions because managing access across large teams is risky right now. Admin control is not granular enough.",
+      "feature": "role-based permissions",
+      "feature_type": "feature_request",
+      "impact": 5,
+      "urgency": 4,
+      "feature_recommendation_justification": "This feature should be prioritized as a Should have because it has strong access control and security implications, with a high priority score driven by major impact and near-term urgency."
+    },
+    "expected_output": {
+      "user_story": "As an admin, I want to define granular roles and permissions, so that users only access what they are allowed to."
+    }
+  },
+  {
+    "id": 2,
+    "input": {
+      "user": "Jean_Jaques",
+      "comment": "The Jira integration fails randomly and tasks are not syncing properly.",
+      "feature": "fix Jira integration sync issues",
+      "feature_type": "bug_report",
+      "impact": 4,
+      "urgency": 4,
+      "feature_recommendation_justification": "This feature should be prioritized as a Should have because the integration issue disrupts active task synchronization and has a high priority score from both major impact and near-term urgency."
+    },
+    "expected_output": {
+      "user_story": "As a project team member, I want Jira integration sync issues fixed, so that tasks stay reliable across systems during active work."
+    }
+  },
+  {
+    "id": 3,
+    "input": {
+      "user": "Alex_Bourgeois",
+      "comment": "The search feature is frustrating. It’s hard to find old tasks in large projects.",
+      "feature": "improve search and filtering",
+      "feature_type": "improvement",
+      "impact": 4,
+      "urgency": 3,
+      "feature_recommendation_justification": "This feature should be prioritized as a Could have because it creates meaningful search inefficiency, but the priority score and urgency indicate it is manageable in the short term."
+    },
+    "expected_output": {
+      "user_story": "As a project user, I want improved search and filtering, so that I can find old tasks in large projects more efficiently."
+    }
+  }
+]
