@@ -8,18 +8,18 @@ Create an AI agent that assists a Product Owner in their daily tasks. The agent 
 
 You work for a SaaS startup that develops a project management platform. The Product Owner is overwhelmed with client feedback, feature requests, and must constantly prioritize the backlog. They need an intelligent assistant to help with their decisions.
 
-## Expected Features
+## Expected Features 
 
 | Category | Features | Description |
 |----------|----------|-------------|
 | **Feedback Analysis** | Client feedback processing | Process client feedback (emails, tickets, comments) |
-| | Pattern identification | Identify patterns and trends in feedback |
-| | Feature extraction | Extract feature requests from feedback |
-| **Prioritization Support** | Feature scoring | Propose feature scoring based on different criteria |
-| | Prioritization frameworks | Apply frameworks (MoSCoW, RICE, etc.) |
-| | Recommendation justification | Explain and justify prioritization recommendations |
-| **Assisted Writing** | User story generation | Generate structured user stories according to standards |
-| | Acceptance criteria | Propose relevant acceptance criteria |
+| | Pattern identification | Identify patterns and trends in feedback | ok 
+| | Feature extraction | Extract feature requests from feedback |       ok 
+| **Prioritization Support** | Feature scoring | Propose feature scoring based on different criteria |  ok
+| | Prioritization frameworks | Apply frameworks (MoSCoW, RICE, etc.) | ok 
+| | Recommendation justification | Explain and justify prioritization recommendations | ok
+| **Assisted Writing** | User story generation | Generate structured user stories according to standards |  
+| | Acceptance criteria | Propose relevant acceptance criteria |    
 | | Complexity estimation | Estimate relative development complexity |
 
 ## Deliverables
@@ -58,3 +58,19 @@ Feel free to contact us for clarifications.
 
 
 **Happy coding!**
+
+
+
+
+### usefull commands : 
+system_profiler SPHardwareDataType SPDisplaysDataType
+sudo powermetrics --samplers gpu_power -i 1000 -n 5    
+tree -a --filelimit 100 --dirsfirst -I ".venv|.git|__pycache__|node_modules|.DS_Store" > project_structure.txt
+
+
+
+A good MVP should expose 3 core commands or screens:
+
+- Analyze feedback
+- Prioritize opportunities
+- Generate user story
