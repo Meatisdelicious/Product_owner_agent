@@ -6,6 +6,9 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Literal
 
+from langchain_core.prompts import ChatPromptTemplate
+from pydantic import BaseModel, Field
+
 
 FeatureType = Literal[
     "feature_request",
@@ -26,7 +29,8 @@ Do not add scoring, prioritization, user stories, or explanations.
 """
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
-DEFAULT_DATASET_PATH = PROJECT_ROOT / "1_Data" / "comments_dataset.json"
+DEFAULT_DATASET_PATH = PROJECT_ROOT / "1_Data" / "agent_1_dataset.json"
+
 
 @dataclass(frozen=True)
 class ExtractorInput:
@@ -41,21 +45,33 @@ class ExtractorOutput:
     feature: str
 
 
+class _ExtractorSchema(BaseModel):
+    feature_type: FeatureType = Field(
+        description="Type of product feature extracted from the comment."
+    )
+    feature: str = Field(description="Short product-focused phrase.")
+
+
+EXTRACTOR_PROMPT = ChatPromptTemplate.from_messages(
+    [
+        ("system", EXTRACTOR_SYSTEM_PROMPT),
+        ("user", "Comment: {comment}"),
+    ]
+)
+
+
 class FeatureExtractor:
     def __init__(self, llm: Any | None = None) -> None:
         self.llm = llm or self._build_default_llm()
+        self.chain = EXTRACTOR_PROMPT | self.llm.with_structured_output(
+            _ExtractorSchema
+        )
 
     def extract(self, comment: str) -> ExtractorOutput:
-        response = self.llm.invoke(
-            [
-                ("system", EXTRACTOR_SYSTEM_PROMPT),
-                ("user", f"Comment: {comment}"),
-            ]
-        )
-        payload = _parse_llm_json_response(response.content)
+        payload = self.chain.invoke({"comment": comment})
         return ExtractorOutput(
-            feature_type=payload["feature_type"],
-            feature=payload["feature"],
+            feature_type=payload.feature_type,
+            feature=payload.feature,
         )
 
     def extract_from_dataset(
@@ -134,17 +150,3 @@ def _parse_dataset_item(item: dict[str, Any]) -> ExtractorInput:
         user=str(input_payload["user"]),
         comment=str(input_payload["comment"]),
     )
-
-
-def _parse_llm_json_response(content: Any) -> dict[str, str]:
-    if isinstance(content, str):
-        text = content.strip()
-    else:
-        text = str(content).strip()
-
-    if text.startswith("```json"):
-        text = text.removeprefix("```json").removesuffix("```").strip()
-    elif text.startswith("```"):
-        text = text.removeprefix("```").removesuffix("```").strip()
-
-    return json.loads(text)
