@@ -20,7 +20,7 @@ from user_story_generator_agent.services.user_story import (  # noqa: E402
 
 if __name__ == "__main__":
     dataset_item = get_user_story_dataset_item(
-        comment_id=3,
+        comment_id=1,
         dataset_path=PROJECT_ROOT / "1_Data" / "agent_3_datset.json",
     )
     result = write_user_story_from_dataset(

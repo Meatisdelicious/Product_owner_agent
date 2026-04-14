@@ -9,8 +9,12 @@ from typing import Any, Literal, cast
 from langchain_core.prompts import ChatPromptTemplate
 from pydantic import BaseModel, Field
 
+from user_story_generator_agent.context.criterias import COMPLEXITY_FACTOR_CRITERIA
+
 
 EvaluationScore = Literal["1", "2", "3", "4", "5"]
+ComplexityFlag = Literal[0, 1]
+DevelopmentComplexity = Literal["Low", "Medium", "High"]
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
 DEFAULT_DATASET_PATH = PROJECT_ROOT / "1_Data" / "agent_3_datset.json"
@@ -28,9 +32,11 @@ As a [user type], I want [feature], so that [impact and urgency outcome].
 
 Return only JSON with:
 - user_story: one concise user story following the template
+- complexity_factors: object with backend_changes, frontend_changes, data_model_changes, security_constraints, and integration_dependencies, each as 0 or 1
 
 Use the feature, impact, urgency, and feature_recommendation_justification as context.
-Do not add acceptance criteria, complexity estimates, prioritization scores, or explanations.
+Do not calculate development_complexity_estimation.
+Do not add acceptance criteria, prioritization scores, or explanations.
 """
 
 
@@ -49,12 +55,54 @@ class UserStoryInput:
 @dataclass(frozen=True)
 class UserStoryOutput:
     user_story: str
+    complexity_factors: ComplexityFactors
+    development_complexity_estimation: DevelopmentComplexity
+
+
+@dataclass(frozen=True)
+class ComplexityFactors:
+    backend_changes: ComplexityFlag
+    frontend_changes: ComplexityFlag
+    data_model_changes: ComplexityFlag
+    security_constraints: ComplexityFlag
+    integration_dependencies: ComplexityFlag
+
+
+class _ComplexityFactorsSchema(BaseModel):
+    backend_changes: ComplexityFlag = Field(
+        description=(
+            "1 if backend, API, or business logic changes are likely needed, "
+            "otherwise 0."
+        )
+    )
+    frontend_changes: ComplexityFlag = Field(
+        description="1 if user interface changes are likely needed, otherwise 0."
+    )
+    data_model_changes: ComplexityFlag = Field(
+        description=(
+            "1 if database, schema, or domain model changes are likely needed, "
+            "otherwise 0."
+        )
+    )
+    security_constraints: ComplexityFlag = Field(
+        description=(
+            "1 if permissions, access control, privacy, or security constraints are "
+            "involved, otherwise 0."
+        )
+    )
+    integration_dependencies: ComplexityFlag = Field(
+        description=(
+            "1 if external systems, APIs, or third-party integrations are involved, "
+            "otherwise 0."
+        )
+    )
 
 
 class _UserStorySchema(BaseModel):
     user_story: str = Field(
         description="One concise user story following the requested template."
     )
+    complexity_factors: _ComplexityFactorsSchema
 
 
 USER_STORY_PROMPT = ChatPromptTemplate.from_messages(
@@ -76,7 +124,20 @@ class UserStoryWriter:
         payload = self.chain.invoke(
             {"payload": _build_user_story_prompt(user_story_input)}
         )
-        return UserStoryOutput(user_story=payload.user_story)
+        complexity_factors = ComplexityFactors(
+            backend_changes=payload.complexity_factors.backend_changes,
+            frontend_changes=payload.complexity_factors.frontend_changes,
+            data_model_changes=payload.complexity_factors.data_model_changes,
+            security_constraints=payload.complexity_factors.security_constraints,
+            integration_dependencies=payload.complexity_factors.integration_dependencies,
+        )
+        return UserStoryOutput(
+            user_story=payload.user_story,
+            complexity_factors=complexity_factors,
+            development_complexity_estimation=(
+                _calculate_development_complexity_estimation(complexity_factors)
+            ),
+        )
 
     def write_from_dataset(
         self,
@@ -164,6 +225,7 @@ def _build_user_story_prompt(user_story_input: UserStoryInput) -> str:
         {
             "input": input_payload,
             "user_story_template": USER_STORY_TEMPLATE,
+            "complexity_factor_criteria": COMPLEXITY_FACTOR_CRITERIA,
         },
         indent=2,
     )
@@ -191,3 +253,22 @@ def _parse_evaluation_score(value: Any) -> EvaluationScore:
         raise ValueError(f"Invalid evaluation score: {value}.")
 
     return cast(EvaluationScore, score)
+
+
+def _calculate_development_complexity_estimation(
+    complexity_factors: ComplexityFactors,
+) -> DevelopmentComplexity:
+    factor_count = (
+        complexity_factors.backend_changes
+        + complexity_factors.frontend_changes
+        + complexity_factors.data_model_changes
+        + complexity_factors.security_constraints
+        + complexity_factors.integration_dependencies
+    )
+
+    if factor_count <= 2:
+        return "Low"
+    if factor_count <= 4:
+        return "Medium"
+
+    return "High"

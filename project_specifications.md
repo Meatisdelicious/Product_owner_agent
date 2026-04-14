@@ -76,11 +76,11 @@ After processing
                 Medium = 3-4
                 High   = 5+
        - feature_acceptance_criteria : 
-           - Generate 2 feature_acceptance_criteria per user_comment
-               - template Who + Action + Expected result
-               - template : Given [who]
-                            When  [action]
-                            Then  [expected result]
+           - Generate 3 feature_acceptance_criteria per user_comment
+                  template : 
+                      Core functionality (does the feature actually work)
+                      Correct behavior / constraint (permissions, sync consistency, relevance)
+                      Real-world usage condition (updates, failures, large scale)
 
 Expected final data output : 
 {
@@ -127,3 +127,31 @@ AI/ML:
 
 Package Management: 
 - uv 
+
+
+
+
+
+acceptance criteria template : 
+
+
+Generate exactly 3 acceptance criteria for the feature.
+
+Structure:
+1. Core functionality → what the user must be able to do
+2. Constraint or validation → what the system must enforce or guarantee
+3. Real-world condition → behavior under update, scale, or failure
+
+Rules:
+- Each criterion must be specific, testable, and based on the user comment.
+- Avoid vague statements like "the feature should work properly".
+- Focus on observable system behavior.
+- Each criterion must be one sentence.
+- Do not include implementation details (no tech, no architecture).
+- Return the result as a JSON array of strings.
+
+Additional constraints:
+- Each sentence must start with "A user can" or "The system".
+- Maximum 20 words per criterion.
+- No duplicated meaning across criteria.
+

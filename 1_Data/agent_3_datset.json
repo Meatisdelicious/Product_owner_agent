@@ -11,7 +11,15 @@
       "feature_recommendation_justification": "This feature should be prioritized as a Should have because it has strong access control and security implications, with a high priority score driven by major impact and near-term urgency."
     },
     "expected_output": {
-      "user_story": "As an admin, I want to define granular roles and permissions, so that users only access what they are allowed to."
+      "user_story": "As an admin, I want to define granular roles and permissions, so that users only access what they are allowed to.",
+      "complexity_factors": {
+        "backend_changes": 1,
+        "frontend_changes": 1,
+        "data_model_changes": 1,
+        "security_constraints": 1,
+        "integration_dependencies": 0
+      },
+      "development_complexity_estimation": "Medium"
     }
   },
   {
@@ -26,7 +34,15 @@
       "feature_recommendation_justification": "This feature should be prioritized as a Should have because the integration issue disrupts active task synchronization and has a high priority score from both major impact and near-term urgency."
     },
     "expected_output": {
-      "user_story": "As a project team member, I want Jira integration sync issues fixed, so that tasks stay reliable across systems during active work."
+      "user_story": "As a project team member, I want Jira integration sync issues fixed, so that tasks stay reliable across systems during active work.",
+      "complexity_factors": {
+        "backend_changes": 1,
+        "frontend_changes": 0,
+        "data_model_changes": 0,
+        "security_constraints": 0,
+        "integration_dependencies": 1
+      },
+      "development_complexity_estimation": "Low"
     }
   },
   {
@@ -41,7 +57,15 @@
       "feature_recommendation_justification": "This feature should be prioritized as a Could have because it creates meaningful search inefficiency, but the priority score and urgency indicate it is manageable in the short term."
     },
     "expected_output": {
-      "user_story": "As a project user, I want improved search and filtering, so that I can find old tasks in large projects more efficiently."
+      "user_story": "As a project user, I want improved search and filtering, so that I can find old tasks in large projects more efficiently.",
+      "complexity_factors": {
+        "backend_changes": 1,
+        "frontend_changes": 1,
+        "data_model_changes": 0,
+        "security_constraints": 0,
+        "integration_dependencies": 0
+      },
+      "development_complexity_estimation": "Low"
     }
   }
 ]
