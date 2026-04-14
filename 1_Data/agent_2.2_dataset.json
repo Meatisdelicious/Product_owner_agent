@@ -13,7 +13,8 @@
       "impact_justification": "Affects core access control across large teams, with strong implications for security and scalability.",
       "urgency_justification": "Represents an immediate risk in current operations, potentially leading to access control issues or misuse.",
       "feature_priority_score": 4.4,
-      "moscow_category_result": "Should have"
+      "moscow_category_result": "Should have",
+      "feature_recommendation_justification": "This feature should be prioritized as a Should have because it has strong access control and security implications, with a high priority score driven by major impact and near-term urgency."
     }
   },
   {
@@ -30,7 +31,8 @@
       "impact_justification": "Breaks coordination between systems and disrupts task tracking, which has a major effect on workflow reliability.",
       "urgency_justification": "The issue occurs in current usage and affects ongoing work, so it requires near-term action to prevent repeated operational disruption.",
       "feature_priority_score": 4.0,
-      "moscow_category_result": "Should have"
+      "moscow_category_result": "Should have",
+      "feature_recommendation_justification": "This feature should be prioritized as a Should have because the integration issue disrupts active task synchronization and has a high priority score from both major impact and near-term urgency."
     }
   },
   {
@@ -47,7 +49,8 @@
       "impact_justification": "Search is a key workflow feature, and poor retrieval in large projects creates significant inefficiency for users.",
       "urgency_justification": "The problem is recurring and reduces productivity, but it does not appear to block core functionality immediately.",
       "feature_priority_score": 3.4,
-      "moscow_category_result": "Could have"
+      "moscow_category_result": "Could have",
+      "feature_recommendation_justification": "This feature should be prioritized as a Could have because it creates meaningful search inefficiency, but the priority score and urgency indicate it is manageable in the short term."
     }
   }
 ]

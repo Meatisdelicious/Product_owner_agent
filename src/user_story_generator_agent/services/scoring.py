@@ -32,13 +32,16 @@ SCORING_SYSTEM_PROMPT = """
 You are Agent 2.2, a product feature scoring justification agent.
 
 Generate justifications for the existing impact and urgency scores.
+Generate a recommendation justification for the computed MoSCoW category.
 
 Return only JSON with:
 - impact_justification: one concise sentence explaining the impact score using the comment, feature_type, feature, impact_criteria, and impact
 - urgency_justification: one concise sentence explaining the urgency score using the comment, feature_type, feature, urgency_criteria, and urgency
+- feature_recommendation_justification: one concise recommendation explaining why the feature should be prioritized as the provided moscow_category_result using the comment, impact, urgency, and feature_priority_score
 
 Do not change the impact or urgency scores.
-Do not add prioritization scores, MoSCoW categories, user stories, or explanations outside JSON.
+Do not change the feature_priority_score or moscow_category_result.
+Do not add user stories or explanations outside JSON.
 """
 
 
@@ -59,6 +62,7 @@ class ScoringOutput:
     urgency_justification: str
     feature_priority_score: float
     moscow_category_result: MoscowCategory
+    feature_recommendation_justification: str
 
 
 class _ScoringSchema(BaseModel):
@@ -67,6 +71,9 @@ class _ScoringSchema(BaseModel):
     )
     urgency_justification: str = Field(
         description="Concise justification for the existing urgency score."
+    )
+    feature_recommendation_justification: str = Field(
+        description="Concise recommendation justification for the computed MoSCoW category."
     )
 
 
@@ -84,15 +91,25 @@ class FeatureScorer:
         self.chain = SCORING_PROMPT | self.llm.with_structured_output(_ScoringSchema)
 
     def score(self, scoring_input: ScoringInput) -> ScoringOutput:
-        payload = self.chain.invoke({"payload": _build_scoring_prompt(scoring_input)})
         feature_priority_score = _calculate_feature_priority_score(scoring_input)
+        moscow_category_result = _calculate_moscow_category_result(
+            feature_priority_score
+        )
+        payload = self.chain.invoke(
+            {
+                "payload": _build_scoring_prompt(
+                    scoring_input,
+                    feature_priority_score,
+                    moscow_category_result,
+                )
+            }
+        )
         return ScoringOutput(
             impact_justification=payload.impact_justification,
             urgency_justification=payload.urgency_justification,
             feature_priority_score=feature_priority_score,
-            moscow_category_result=_calculate_moscow_category_result(
-                feature_priority_score
-            ),
+            moscow_category_result=moscow_category_result,
+            feature_recommendation_justification=payload.feature_recommendation_justification,
         )
 
     def score_from_dataset(
@@ -164,7 +181,11 @@ def score_feature_from_dataset(
     return scorer.score_from_dataset(comment_id, dataset_path)
 
 
-def _build_scoring_prompt(scoring_input: ScoringInput) -> str:
+def _build_scoring_prompt(
+    scoring_input: ScoringInput,
+    feature_priority_score: float,
+    moscow_category_result: MoscowCategory,
+) -> str:
     input_payload = {
         "id": scoring_input.id,
         "user": scoring_input.user,
@@ -173,6 +194,8 @@ def _build_scoring_prompt(scoring_input: ScoringInput) -> str:
         "feature": scoring_input.feature,
         "impact": scoring_input.impact,
         "urgency": scoring_input.urgency,
+        "feature_priority_score": feature_priority_score,
+        "moscow_category_result": moscow_category_result,
     }
     return json.dumps(
         {
@@ -214,7 +237,7 @@ def _calculate_moscow_category_result(
         return "Should have"
     if feature_priority_score >= 2.5:
         return "Could have"
-    
+
     return "Won't have for now"
 
 
