@@ -9,7 +9,7 @@
     },
     "expected_output": {
       "impact": 5,
-      "urgency": 5
+      "urgency": 4
     }
   },
   {
@@ -22,7 +22,7 @@
     },
     "expected_output": {
       "impact": 4,
-      "urgency": 5
+      "urgency": 4
     }
   },
   {
@@ -34,7 +34,7 @@
       "feature": "improve search and filtering"
     },
     "expected_output": {
-      "impact": 3,
+      "impact": 4,
       "urgency": 3
     }
   }
