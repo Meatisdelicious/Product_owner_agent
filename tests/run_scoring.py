@@ -20,7 +20,7 @@ from user_story_generator_agent.services.scoring import (
 
 if __name__ == "__main__":
     dataset_item = get_scoring_dataset_item(
-        comment_id=3,
+        comment_id=1,
         dataset_path=PROJECT_ROOT / "1_Data" / "agent_2.2_dataset.json",
     )
     result = score_feature_from_dataset(

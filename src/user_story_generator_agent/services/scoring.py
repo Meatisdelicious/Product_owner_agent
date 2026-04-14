@@ -14,8 +14,14 @@ from user_story_generator_agent.context.criterias import (
     URGENCY_CRITERIA,
 )
 
-
 EvaluationScore = Literal["1", "2", "3", "4", "5"]
+MoscowCategory = Literal[
+    "Must have",
+    "Should have",
+    "Could have",
+    "Won't have for now",
+]
+
 FEATURE_PRIORITY_IMPACT_WEIGHT = 0.4
 FEATURE_PRIORITY_URGENCY_WEIGHT = 0.6
 
@@ -52,6 +58,7 @@ class ScoringOutput:
     impact_justification: str
     urgency_justification: str
     feature_priority_score: float
+    moscow_category_result: MoscowCategory
 
 
 class _ScoringSchema(BaseModel):
@@ -78,10 +85,14 @@ class FeatureScorer:
 
     def score(self, scoring_input: ScoringInput) -> ScoringOutput:
         payload = self.chain.invoke({"payload": _build_scoring_prompt(scoring_input)})
+        feature_priority_score = _calculate_feature_priority_score(scoring_input)
         return ScoringOutput(
             impact_justification=payload.impact_justification,
             urgency_justification=payload.urgency_justification,
-            feature_priority_score=_calculate_feature_priority_score(scoring_input),
+            feature_priority_score=feature_priority_score,
+            moscow_category_result=_calculate_moscow_category_result(
+                feature_priority_score
+            ),
         )
 
     def score_from_dataset(
@@ -192,6 +203,19 @@ def _calculate_feature_priority_score(scoring_input: ScoringInput) -> float:
         + FEATURE_PRIORITY_URGENCY_WEIGHT * int(scoring_input.urgency),
         1,
     )
+
+
+def _calculate_moscow_category_result(
+    feature_priority_score: float,
+) -> MoscowCategory:
+    if feature_priority_score >= 4.5:
+        return "Must have"
+    if feature_priority_score >= 3.5:
+        return "Should have"
+    if feature_priority_score >= 2.5:
+        return "Could have"
+    
+    return "Won't have for now"
 
 
 def _parse_evaluation_score(value: Any) -> EvaluationScore:

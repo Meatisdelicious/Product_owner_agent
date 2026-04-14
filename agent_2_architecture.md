@@ -57,4 +57,5 @@ output_example :
 {
   "impact_justification":"Affects core access control across large teams, with strong implications for security and scalability.",
   "urgency_justification": "Represents an immediate risk in current operations, potentially leading to access control issues or misuse.",
+  "feature_priority_score": 4.4
 },
