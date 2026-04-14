@@ -16,6 +16,8 @@ from user_story_generator_agent.context.criterias import (
 
 
 EvaluationScore = Literal["1", "2", "3", "4", "5"]
+FEATURE_PRIORITY_IMPACT_WEIGHT = 0.4
+FEATURE_PRIORITY_URGENCY_WEIGHT = 0.6
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
 DEFAULT_DATASET_PATH = PROJECT_ROOT / "1_Data" / "agent_2.2_dataset.json"
@@ -49,6 +51,7 @@ class ScoringInput:
 class ScoringOutput:
     impact_justification: str
     urgency_justification: str
+    feature_priority_score: float
 
 
 class _ScoringSchema(BaseModel):
@@ -78,6 +81,7 @@ class FeatureScorer:
         return ScoringOutput(
             impact_justification=payload.impact_justification,
             urgency_justification=payload.urgency_justification,
+            feature_priority_score=_calculate_feature_priority_score(scoring_input),
         )
 
     def score_from_dataset(
@@ -179,6 +183,14 @@ def _parse_dataset_item(item: dict[str, Any]) -> ScoringInput:
         feature=str(input_payload["feature"]),
         impact=_parse_evaluation_score(input_payload["impact"]),
         urgency=_parse_evaluation_score(input_payload["urgency"]),
+    )
+
+
+def _calculate_feature_priority_score(scoring_input: ScoringInput) -> float:
+    return round(
+        FEATURE_PRIORITY_IMPACT_WEIGHT * int(scoring_input.impact)
+        + FEATURE_PRIORITY_URGENCY_WEIGHT * int(scoring_input.urgency),
+        1,
     )
 
 

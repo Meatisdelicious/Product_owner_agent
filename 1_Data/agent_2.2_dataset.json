@@ -10,8 +10,9 @@
       "urgency": 4
     },
     "expected_output": {
-      "impact_justification":"Affects core access control across large teams, with strong implications for security and scalability.",
-      "urgency_justification": "Represents an immediate risk in current operations, potentially leading to access control issues or misuse."
+      "impact_justification": "Affects core access control across large teams, with strong implications for security and scalability.",
+      "urgency_justification": "Represents an immediate risk in current operations, potentially leading to access control issues or misuse.",
+      "feature_priority_score": 4.4
     }
   },
   {
@@ -26,7 +27,8 @@
     },
     "expected_output": {
       "impact_justification": "Breaks coordination between systems and disrupts task tracking, which has a major effect on workflow reliability.",
-      "urgency_justification": "The issue occurs in current usage and affects ongoing work, so it requires near-term action to prevent repeated operational disruption."
+      "urgency_justification": "The issue occurs in current usage and affects ongoing work, so it requires near-term action to prevent repeated operational disruption.",
+      "feature_priority_score": 4.0
     }
   },
   {
@@ -41,7 +43,8 @@
     },
     "expected_output": {
       "impact_justification": "Search is a key workflow feature, and poor retrieval in large projects creates significant inefficiency for users.",
-      "urgency_justification": "The problem is recurring and reduces productivity, but it does not appear to block core functionality immediately."
+      "urgency_justification": "The problem is recurring and reduces productivity, but it does not appear to block core functionality immediately.",
+      "feature_priority_score": 3.4
     }
   }
 ]
