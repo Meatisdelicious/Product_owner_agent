@@ -21,11 +21,11 @@ from user_story_generator_agent.services.extractor import (
 if __name__ == "__main__":
     dataset_item = get_dataset_item(
         comment_id=1,
-        dataset_path=PROJECT_ROOT / "1_Data" / "comments_dataset.json",
+        dataset_path=PROJECT_ROOT / "1_Data" / "agent_1_dataset.json",
     )
     result = extract_feature_from_dataset(
         comment_id=dataset_item.id,
-        dataset_path=PROJECT_ROOT / "1_Data" / "comments_dataset.json",
+        dataset_path=PROJECT_ROOT / "1_Data" / "agent_1_dataset.json",
     )
 
     print("Input comment:")
