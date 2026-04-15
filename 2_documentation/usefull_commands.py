@@ -6,3 +6,12 @@
 
 # update project structure file :
 # tree -a --filelimit 100 --dirsfirst -I ".venv|.git|__pycache__|node_modules|.DS_Store" > project_structure.txt
+
+# run the full Product Owner pipeline:
+# uv run python tests/run_full_pipeline.py
+
+# Why did i not use LangGraph? 
+# I connected the agents through a typed sequential orchestration layer. 
+# I did not use LangGraph in the MVP because the workflow is linear, 
+# but the architecture keeps each step isolated so it can later be migrated to 
+# a graph if branching, retries, or human validation are needed.

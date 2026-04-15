@@ -1,0 +1,98 @@
+[
+  {
+    "id": 1,
+    "input": {
+      "user": "Marie_Dupont",
+      "comment": "We need role-based permissions because managing access across large teams is risky right now. Admin control is not granular enough."
+    },
+    "expected_output": {
+      "feature_type": "feature_request",
+      "feature": "role-based permissions",
+      "impact": 5,
+      "urgency": 4,
+      "impact_justification": "Affects core access control across large teams, with strong implications for security and scalability.",
+      "urgency_justification": "Represents an immediate risk in current operations, potentially leading to access control issues or misuse.",
+      "feature_priority_score": 4.4,
+      "moscow_category_result": "Should have",
+      "feature_recommendation_justification": "This feature should be prioritized as a Should have because it has strong access control and security implications, with a high priority score driven by major impact and near-term urgency.",
+      "user_story": "As an admin, I want to define granular roles and permissions, so that users only access what they are allowed to.",
+      "complexity_factors": {
+        "backend_changes": 1,
+        "frontend_changes": 1,
+        "data_model_changes": 1,
+        "security_constraints": 1,
+        "integration_dependencies": 0
+      },
+      "development_complexity_estimation": "Medium",
+      "feature_acceptance_criteria": [
+        "An admin can create and assign roles with distinct permission levels.",
+        "A user can only access actions and data permitted by their assigned role.",
+        "When a user's role is updated, the new permissions apply immediately."
+      ]
+    }
+  },
+  {
+    "id": 2,
+    "input": {
+      "user": "Jean_Jaques",
+      "comment": "The Jira integration fails randomly and tasks are not syncing properly."
+    },
+    "expected_output": {
+      "feature_type": "bug_report",
+      "feature": "fix Jira integration sync issues",
+      "impact": 4,
+      "urgency": 4,
+      "impact_justification": "Breaks coordination between systems and disrupts task tracking, which has a major effect on workflow reliability.",
+      "urgency_justification": "The issue occurs in current usage and affects ongoing work, so it requires near-term action to prevent repeated operational disruption.",
+      "feature_priority_score": 4.0,
+      "moscow_category_result": "Should have",
+      "feature_recommendation_justification": "This feature should be prioritized as a Should have because the integration issue disrupts active task synchronization and has a high priority score from both major impact and near-term urgency.",
+      "user_story": "As a project team member, I want Jira integration sync issues fixed, so that tasks stay reliable across systems during active work.",
+      "complexity_factors": {
+        "backend_changes": 1,
+        "frontend_changes": 0,
+        "data_model_changes": 0,
+        "security_constraints": 0,
+        "integration_dependencies": 1
+      },
+      "development_complexity_estimation": "Low",
+      "feature_acceptance_criteria": [
+        "A user can see task updates synchronized between the platform and Jira.",
+        "The system ensures task data remains consistent across both systems.",
+        "The system reports synchronization failures without creating duplicate or corrupted tasks."
+      ]
+    }
+  },
+  {
+    "id": 3,
+    "input": {
+      "user": "Alex_Bourgeois",
+      "comment": "The search feature is frustrating. It’s hard to find old tasks in large projects."
+    },
+    "expected_output": {
+      "feature_type": "improvement",
+      "feature": "improve search and filtering",
+      "impact": 4,
+      "urgency": 3,
+      "impact_justification": "Search is a key workflow feature, and poor retrieval in large projects creates significant inefficiency for users.",
+      "urgency_justification": "The problem is recurring and reduces productivity, but it does not appear to block core functionality immediately.",
+      "feature_priority_score": 3.4,
+      "moscow_category_result": "Could have",
+      "feature_recommendation_justification": "This feature should be prioritized as a Could have because it creates meaningful search inefficiency, but the priority score and urgency indicate it is manageable in the short term.",
+      "user_story": "As a project user, I want improved search and filtering, so that I can find old tasks in large projects more efficiently.",
+      "complexity_factors": {
+        "backend_changes": 1,
+        "frontend_changes": 1,
+        "data_model_changes": 0,
+        "security_constraints": 0,
+        "integration_dependencies": 0
+      },
+      "development_complexity_estimation": "Low",
+      "feature_acceptance_criteria": [
+        "A user can search tasks by keyword and retrieve relevant results.",
+        "The system returns accurate results matching the search query.",
+        "The system provides relevant results even in large projects with many tasks."
+      ]
+    }
+  }
+]
