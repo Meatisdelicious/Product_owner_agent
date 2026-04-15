@@ -14,7 +14,7 @@ Output :
 - user story                        (input_context : feature+impact+urgency+template)
 - complexity_factors                (input_context: comment + feature + feature_type + impact + urgency + feature_recommendation_justification + complexity_factor_criteria)
 - development_complexity_estimation (input_context : feature, feature_type, feature_recommendation_justification, complexity_factors)
-- feature_acceptance_criteria (input_context : comment+feature+feature_type+impact + urgency + template)
+- feature_acceptance_criteria (input_context : comment+feature+feature_type + user_story + template)
 
 input_example : 
 {
@@ -37,7 +37,7 @@ output_example :
         "security_constraints": 1,
         "integration_dependencies": 0
       },
-      "development_complexity_estimation": "Medium"
+      "development_complexity_estimation": "Medium",
       "feature_acceptance_criteria": [
         "An admin can create and assign roles with distinct permission levels.",
         "A user can only access actions and data permitted by their assigned role.",

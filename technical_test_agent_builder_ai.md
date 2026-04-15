@@ -18,9 +18,9 @@ You work for a SaaS startup that develops a project management platform. The Pro
 | **Prioritization Support** | Feature scoring | Propose feature scoring based on different criteria |  ok
 | | Prioritization frameworks | Apply frameworks (MoSCoW, RICE, etc.) | ok 
 | | Recommendation justification | Explain and justify prioritization recommendations | ok
-| **Assisted Writing** | User story generation | Generate structured user stories according to standards |  
-| | Acceptance criteria | Propose relevant acceptance criteria |    
-| | Complexity estimation | Estimate relative development complexity |
+| **Assisted Writing** | User story generation | Generate structured user stories according to standards |  ok
+| | Acceptance criteria | Propose relevant acceptance criteria |    ok
+| | Complexity estimation | Estimate relative development complexity |     ok
 
 ## Deliverables
 

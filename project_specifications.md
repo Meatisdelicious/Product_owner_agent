@@ -103,16 +103,9 @@ Expected final data output :
                         },
   "development_complexity_estimation": "High",
   "feature_acceptance_criteria": [
-                                    {
-                                      "given": "an admin user",
-                                      "when": "they create a custom role with specific permissions",
-                                      "then": "the new role is saved and can be assigned to users"
-                                    },
-                                    {
-                                      "given": "a user assigned to a restricted role",
-                                      "when": "they access the platform",
-                                      "then": "they can only view and modify resources allowed by their role"
-                                    }
+                                  "A user can be assigned a role with specific permission levels.",
+                                  "The system restricts access to actions based on the user's assigned role.",
+                                  "The system updates user permissions immediately after a role change."
                                   ]
 },
 
@@ -132,8 +125,7 @@ Package Management:
 
 
 
-acceptance criteria template : 
-
+acceptance_criteria template : 
 
 Generate exactly 3 acceptance criteria for the feature.
 

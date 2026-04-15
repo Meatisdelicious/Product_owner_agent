@@ -19,7 +19,12 @@
         "security_constraints": 1,
         "integration_dependencies": 0
       },
-      "development_complexity_estimation": "Medium"
+      "development_complexity_estimation": "Medium", 
+      "feature_acceptance_criteria": [
+        "An admin can create and assign roles with distinct permission levels.",
+        "A user can only access actions and data permitted by their assigned role.",
+        "When a user's role is updated, the new permissions apply immediately."
+      ]
     }
   },
   {
@@ -42,7 +47,12 @@
         "security_constraints": 0,
         "integration_dependencies": 1
       },
-      "development_complexity_estimation": "Low"
+      "development_complexity_estimation": "Low", 
+      "feature_acceptance_criteria": [
+        "A user can see task updates synchronized between the platform and Jira.",
+        "The system ensures task data remains consistent across both systems.",
+        "The system reports synchronization failures without creating duplicate or corrupted tasks."
+      ]
     }
   },
   {
@@ -65,7 +75,12 @@
         "security_constraints": 0,
         "integration_dependencies": 0
       },
-      "development_complexity_estimation": "Low"
+      "development_complexity_estimation": "Low", 
+      "feature_acceptance_criteria": [
+        "A user can search tasks by keyword and retrieve relevant results.",
+        "The system returns accurate results matching the search query.",
+        "The system provides relevant results even in large projects with many tasks."
+      ]
     }
   }
 ]

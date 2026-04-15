@@ -39,7 +39,7 @@ Output 1:
 - user story (input_context : feature+impact+urgency+template)
 - - complexity_factors                (input_context: comment + feature + feature_type + impact + urgency + feature_recommendation_justification + complexity_factor_criteria)
 - development_complexity_estimation (input_context : feature, feature_type, feature_recommendation_justification, complexity_factors)
-- feature_acceptance_criteria (input_context : comment + template)
+- feature_acceptance_criteria (input_context : comment + feature + user_story + template)
 
 
 

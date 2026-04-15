@@ -21,11 +21,33 @@ DEFAULT_DATASET_PATH = PROJECT_ROOT / "1_Data" / "agent_3_datset.json"
 USER_STORY_TEMPLATE = (
     "As a [user type], I want [feature], so that [impact and urgency outcome]."
 )
+ACCEPTANCE_CRITERIA_TEMPLATE = """
+Generate exactly 3 acceptance criteria for the feature.
+
+Structure:
+1. Core functionality -> what the user must be able to do
+2. Constraint or validation -> what the system must enforce or guarantee
+3. Real-world condition -> behavior under update, scale, or failure
+
+Rules:
+- Each criterion must be specific, testable, and based on the user comment.
+- Avoid vague statements like "the feature should work properly".
+- Focus on observable system behavior.
+- Each criterion must be one sentence.
+- Do not include implementation details (no tech, no architecture).
+- Return the result as a JSON array of strings.
+
+Additional constraints:
+- Each sentence must start with "A user can" or "The system".
+- Maximum 20 words per criterion.
+- No duplicated meaning across criteria.
+"""
 
 USER_STORY_SYSTEM_PROMPT = """
 You are Agent 3, a product user story writer.
 
 Write one user story for the extracted product feature.
+Generate exactly 3 acceptance criteria for the feature.
 
 Use this template:
 As a [user type], I want [feature], so that [impact and urgency outcome].
@@ -33,10 +55,11 @@ As a [user type], I want [feature], so that [impact and urgency outcome].
 Return only JSON with:
 - user_story: one concise user story following the template
 - complexity_factors: object with backend_changes, frontend_changes, data_model_changes, security_constraints, and integration_dependencies, each as 0 or 1
+- feature_acceptance_criteria: JSON array of exactly 3 strings
 
 Use the feature, impact, urgency, and feature_recommendation_justification as context.
 Do not calculate development_complexity_estimation.
-Do not add acceptance criteria, prioritization scores, or explanations.
+Do not add prioritization scores or explanations.
 """
 
 
@@ -57,6 +80,7 @@ class UserStoryOutput:
     user_story: str
     complexity_factors: ComplexityFactors
     development_complexity_estimation: DevelopmentComplexity
+    feature_acceptance_criteria: list[str]
 
 
 @dataclass(frozen=True)
@@ -103,6 +127,14 @@ class _UserStorySchema(BaseModel):
         description="One concise user story following the requested template."
     )
     complexity_factors: _ComplexityFactorsSchema
+    feature_acceptance_criteria: list[str] = Field(
+        min_length=3,
+        max_length=3,
+        description=(
+            "Exactly 3 acceptance criteria, each specific, testable, one sentence, "
+            "20 words maximum, and starting with 'A user can' or 'The system'."
+        ),
+    )
 
 
 USER_STORY_PROMPT = ChatPromptTemplate.from_messages(
@@ -137,6 +169,7 @@ class UserStoryWriter:
             development_complexity_estimation=(
                 _calculate_development_complexity_estimation(complexity_factors)
             ),
+            feature_acceptance_criteria=list(payload.feature_acceptance_criteria),
         )
 
     def write_from_dataset(
@@ -225,6 +258,7 @@ def _build_user_story_prompt(user_story_input: UserStoryInput) -> str:
         {
             "input": input_payload,
             "user_story_template": USER_STORY_TEMPLATE,
+            "acceptance_criteria_template": ACCEPTANCE_CRITERIA_TEMPLATE,
             "complexity_factor_criteria": COMPLEXITY_FACTOR_CRITERIA,
         },
         indent=2,
