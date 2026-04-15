@@ -110,13 +110,67 @@ security_constraints
 integration_dependencies
 ```
 
-Then it computes `development_complexity_estimation` locally:
+Each factor is a binary value:
+- `0` means this type of work is not expected.
+- `1` means this type of work is expected.
+
+The local complexity score is the sum of the five factors:
 
 ```text
-0-2 factors -> Low
-3-4 factors -> Medium
-5+ factors  -> High
+complexity_score =
+  backend_changes
+  + frontend_changes
+  + data_model_changes
+  + security_constraints
+  + integration_dependencies
 ```
+
+Because there are five binary factors, the score can only be between `0` and `5`.
+
+Examples:
+
+```text
+backend_changes = 1
+frontend_changes = 1
+data_model_changes = 0
+security_constraints = 0
+integration_dependencies = 0
+
+complexity_score = 1 + 1 + 0 + 0 + 0 = 2
+development_complexity_estimation = Low
+```
+
+```text
+backend_changes = 1
+frontend_changes = 1
+data_model_changes = 1
+security_constraints = 1
+integration_dependencies = 0
+
+complexity_score = 1 + 1 + 1 + 1 + 0 = 4
+development_complexity_estimation = Medium
+```
+
+```text
+backend_changes = 1
+frontend_changes = 1
+data_model_changes = 1
+security_constraints = 1
+integration_dependencies = 1
+
+complexity_score = 1 + 1 + 1 + 1 + 1 = 5
+development_complexity_estimation = High
+```
+
+Agent 3 then maps the local score to `development_complexity_estimation`:
+
+```text
+0-2 factors -> Low complexity
+3-4 factors -> Medium complexity
+5 factors   -> High complexity
+```
+
+This is a simple additive model. All factors currently have the same weight, so a security constraint counts the same as a frontend change or an integration dependency.
 
 ## Acceptance Criteria Rules
 
@@ -135,4 +189,3 @@ Each criterion must be:
 - maximum 20 words
 - prefixed by `A user can` or `The system`
 - free of implementation details
-
