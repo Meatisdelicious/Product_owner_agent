@@ -1,4 +1,4 @@
-# Agent 1 Architecture
+# Agent 1 Architecture (extractor)
 
 Agent 1 extracts a product feature from a user comment.
 
