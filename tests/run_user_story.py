@@ -21,11 +21,11 @@ from user_story_generator_agent.services.user_story import (  # noqa: E402
 if __name__ == "__main__":
     dataset_item = get_user_story_dataset_item(
         comment_id=1,
-        dataset_path=PROJECT_ROOT / "1_Data" / "agent_3_datset.json",
+        dataset_path=PROJECT_ROOT / "1_Data" / "agent_3_dataset.json",
     )
     result = write_user_story_from_dataset(
         comment_id=dataset_item.id,
-        dataset_path=PROJECT_ROOT / "1_Data" / "agent_3_datset.json",
+        dataset_path=PROJECT_ROOT / "1_Data" / "agent_3_dataset.json",
     )
 
     print("Input:")
