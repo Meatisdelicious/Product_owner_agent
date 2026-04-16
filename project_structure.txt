@@ -1,31 +1,56 @@
 .
 ├── 1_Data
 │   ├── agent_1_dataset.json
-│   └── agent_2.1_dataset.json
+│   ├── agent_2.1_dataset.json
+│   ├── agent_2.2_dataset.json
+│   ├── agent_3_dataset.json
+│   ├── full_pipeline_large_dataset.json
+│   └── full_pipeline_small_dataset.json
 ├── 2_documentation
-│   └── usefull_commands.py
+│   ├── architecture_diagrams
+│   ├── technical_documentation
+│   │   ├── agent_1_architecture_example.md
+│   │   ├── agent_2_architecture_example.md
+│   │   ├── agent_3_architecture_example.md
+│   │   ├── full_pipeline_specifications_specs.md
+│   │   └── project_architecture_specs.md
+│   ├── agent_1_architecture.md
+│   ├── agent_2_architecture.md
+│   ├── agent_3_architecture.md
+│   ├── full_pipeline_architecture.md
+│   └── notes.py
 ├── src
 │   └── user_story_generator_agent
 │       ├── api
 │       ├── context
-│       │   └── evaluation_criterias.py
+│       │   └── criterias.py
 │       ├── services
 │       │   ├── __init__.py
 │       │   ├── evaluation.py
-│       │   └── extractor.py
+│       │   ├── extractor.py
+│       │   ├── orchestrator.py
+│       │   ├── scoring.py
+│       │   └── user_story.py
+│       ├── ui
+│       │   ├── __init__.py
+│       │   └── streamlit_app.py
 │       └── __init__.py
 ├── tests
-│   └── run_extractor.py
+│   ├── evaluation
+│   │   └── evaluate_full_pipeline.py
+│   ├── inference
+│   │   └── inference_full_pipeline.py
+│   ├── run_evaluation.py
+│   ├── run_extractor.py
+│   ├── run_full_pipeline.py
+│   ├── run_scoring.py
+│   └── run_user_story.py
 ├── .env
 ├── .gitignore
 ├── .python-version
-├── agent_1_architecture.md
-├── agent_2_architecture.md
-├── project_architecture.md
-├── project_specifications.md
 ├── project_structure.txt
 ├── pyproject.toml
 ├── technical_test_agent_builder_ai.md
 └── uv.lock
 
-9 directories, 20 files
+14 directories, 40 files
