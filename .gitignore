@@ -9,3 +9,5 @@ __pycache__/
 .env
 # uv lockfile
 uv.lock
+
+2_documentation/notes.py

@@ -62,15 +62,4 @@ Feel free to contact us for clarifications.
 
 
 
-### usefull commands : 
-system_profiler SPHardwareDataType SPDisplaysDataType
-sudo powermetrics --samplers gpu_power -i 1000 -n 5    
-tree -a --filelimit 100 --dirsfirst -I ".venv|.git|__pycache__|node_modules|.DS_Store" > project_structure.txt
 
-
-
-A good MVP should expose 3 core commands or screens:
-
-- Analyze feedback
-- Prioritize opportunities
-- Generate user story
