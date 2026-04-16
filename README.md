@@ -6,7 +6,7 @@ AI assistant for Product Owners. It analyzes a user feedback comment, extracts t
   <img src="1_Data/readme_imgs/start_page.png" alt="Product Owner Agent start page" width="50%">
 </p>
 
-The project was built for the technical test described in [`technical_test_agent_builder_ai.md`](technical_test_agent_builder_ai.md).
+The project was built according to the specifications described in [`technical_test_agent_builder_ai.md`](technical_test_agent_builder_ai.md).
 
 ## What It Does
 
