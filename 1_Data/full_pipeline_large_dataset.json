@@ -1,0 +1,962 @@
+[
+  {
+    "id": 1,
+    "input": {
+      "user": "Marie_Dupont",
+      "comment": "We need role-based permissions because managing access across large teams is risky right now. Admin control is not granular enough."
+    },
+    "expected_output": {
+      "feature_type": "feature_request",
+      "feature": "role-based permissions",
+      "impact": "5",
+      "urgency": "4",
+      "impact_justification": "The impact score of 5 reflects the significant security risk posed by inadequate access management in large teams, as highlighted in the comment regarding role-based permissions.",
+      "urgency_justification": "The urgency score of 4 indicates a frequent problem that requires near-term action to enhance access control and mitigate risks, as mentioned in the comment.",
+      "feature_priority_score": 4.4,
+      "moscow_category_result": "Should have",
+      "feature_recommendation_justification": "The feature should be prioritized as 'Should have' due to its high impact on security and significant urgency, resulting in a strong feature priority score of 4.4.",
+      "user_story": "As a team manager, I want role-based permissions, so that I can securely manage access across large teams.",
+      "complexity_factors": {
+        "backend_changes": 1,
+        "frontend_changes": 1,
+        "data_model_changes": 1,
+        "security_constraints": 1,
+        "integration_dependencies": 0
+      },
+      "development_complexity_estimation": "Medium",
+      "feature_acceptance_criteria": [
+        "A user can assign specific roles to team members to control their access levels.",
+        "The system must enforce role-based access controls to prevent unauthorized actions.",
+        "The system should maintain performance when managing permissions for large teams."
+      ]
+    }
+  },
+  {
+    "id": 2,
+    "input": {
+      "user": "Jean_Jaques",
+      "comment": "The Jira integration fails randomly and tasks are not syncing properly."
+    },
+    "expected_output": {
+      "feature_type": "bug_report",
+      "feature": "Jira integration sync failure",
+      "impact": "4",
+      "urgency": "4",
+      "impact_justification": "The Jira integration sync failure has a major workflow impact as it disrupts task synchronization.",
+      "urgency_justification": "The issue is frequent and needs near-term action to prevent ongoing disruptions.",
+      "feature_priority_score": 4.0,
+      "moscow_category_result": "Should have",
+      "feature_recommendation_justification": "This feature should be prioritized as a 'Should have' because it has a significant impact and urgency score of 4, indicating it is important for maintaining workflow efficiency.",
+      "user_story": "As a user, I want the Jira integration to sync reliably, so that my tasks are updated without failure.",
+      "complexity_factors": {
+        "backend_changes": 1,
+        "frontend_changes": 0,
+        "data_model_changes": 0,
+        "security_constraints": 0,
+        "integration_dependencies": 1
+      },
+      "development_complexity_estimation": "Low",
+      "feature_acceptance_criteria": [
+        "A user can successfully sync tasks with Jira without encountering errors.",
+        "The system guarantees that all task updates are reflected in real-time during sync.",
+        "The system maintains sync functionality even under high load or network issues."
+      ]
+    }
+  },
+  {
+    "id": 3,
+    "input": {
+      "user": "Alex_Bourgeois",
+      "comment": "The search feature is frustrating. It is hard to find old tasks in large projects."
+    },
+    "expected_output": {
+      "feature_type": "improvement",
+      "feature": "Enhance search functionality for old tasks",
+      "impact": "4",
+      "urgency": "3",
+      "impact_justification": "The enhancement of search functionality for old tasks has a major workflow impact as it addresses the frustration expressed in the comment.",
+      "urgency_justification": "The issue with the search feature is a recurring problem that is manageable in the short term, justifying the urgency score.",
+      "feature_priority_score": 3.4,
+      "moscow_category_result": "Could have",
+      "feature_recommendation_justification": "The feature should be prioritized as 'Could have' because, while it has a significant impact on workflow, the urgency is moderate, indicating it can be addressed after more critical tasks.",
+      "user_story": "As a project manager, I want to enhance search functionality for old tasks, so that I can quickly find relevant information.",
+      "complexity_factors": {
+        "backend_changes": 1,
+        "frontend_changes": 1,
+        "data_model_changes": 0,
+        "security_constraints": 0,
+        "integration_dependencies": 0
+      },
+      "development_complexity_estimation": "Low",
+      "feature_acceptance_criteria": [
+        "A user can search for old tasks using keywords and filters.",
+        "The system returns relevant old tasks based on the user's search criteria.",
+        "The system maintains performance when searching through large project histories."
+      ]
+    }
+  },
+  {
+    "id": 4,
+    "input": {
+      "user": "Sofia_Martin",
+      "comment": "It would help if managers could create custom dashboard widgets for overdue tasks and team workload."
+    },
+    "expected_output": {
+      "feature_type": "feature_request",
+      "feature": "custom dashboard widgets for overdue tasks and team workload",
+      "impact": "4",
+      "urgency": "3",
+      "impact_justification": "The feature of custom dashboard widgets for overdue tasks and team workload has a major workflow impact as it would significantly enhance task management for managers.",
+      "urgency_justification": "The urgency score reflects that while the need for this feature is recurring, it is manageable in the short term without immediate action.",
+      "feature_priority_score": 3.4,
+      "moscow_category_result": "Could have",
+      "feature_recommendation_justification": "Given the major impact and manageable urgency, prioritizing this feature as 'Could have' aligns with its potential to improve workflows without being critical at this time.",
+      "user_story": "As a manager, I want custom dashboard widgets for overdue tasks and team workload, so that I can better manage my team's performance.",
+      "complexity_factors": {
+        "backend_changes": 1,
+        "frontend_changes": 1,
+        "data_model_changes": 0,
+        "security_constraints": 0,
+        "integration_dependencies": 0
+      },
+      "development_complexity_estimation": "Low",
+      "feature_acceptance_criteria": [
+        "A user can create custom widgets for overdue tasks on the dashboard.",
+        "The system validates that widgets display accurate overdue task data.",
+        "The system updates widget data in real-time as tasks change status."
+      ]
+    }
+  },
+  {
+    "id": 5,
+    "input": {
+      "user": "Nina_Leroy",
+      "comment": "Task reminders are not being sent before deadlines, so several teammates miss important handoffs."
+    },
+    "expected_output": {
+      "feature_type": "bug_report",
+      "feature": "Task reminders not sent before deadlines",
+      "impact": "4",
+      "urgency": "4",
+      "impact_justification": "The impact score of 4 reflects a major workflow impact as task reminders not being sent before deadlines leads to missed important handoffs.",
+      "urgency_justification": "The urgency score of 4 indicates a frequent problem needing near-term action, as teammates are regularly missing deadlines due to this issue.",
+      "feature_priority_score": 4.0,
+      "moscow_category_result": "Should have",
+      "feature_recommendation_justification": "The feature should be prioritized as 'Should have' because it has a significant impact and urgency score of 4, indicating that resolving this bug is important for maintaining workflow efficiency.",
+      "user_story": "As a user, I want task reminders to be sent before deadlines, so that I can ensure timely handoffs.",
+      "complexity_factors": {
+        "backend_changes": 1,
+        "frontend_changes": 0,
+        "data_model_changes": 0,
+        "security_constraints": 0,
+        "integration_dependencies": 0
+      },
+      "development_complexity_estimation": "Low",
+      "feature_acceptance_criteria": [
+        "A user can receive task reminders at least 24 hours before deadlines.",
+        "The system must ensure reminders are sent for all assigned tasks.",
+        "The system should handle reminder failures gracefully without affecting other notifications."
+      ]
+    }
+  },
+  {
+    "id": 6,
+    "input": {
+      "user": "Omar_Benali",
+      "comment": "We want to improve board loading performance for projects with hundreds of tasks during sprint planning."
+    },
+    "expected_output": {
+      "feature_type": "improvement",
+      "feature": "board loading performance during sprint planning",
+      "impact": "4",
+      "urgency": "3",
+      "impact_justification": "The feature has a major workflow impact as it aims to improve board loading performance for projects with hundreds of tasks during sprint planning.",
+      "urgency_justification": "The urgency score reflects a recurring issue that is manageable in the short term, as the current performance can be tolerated but is not ideal.",
+      "feature_priority_score": 3.4,
+      "moscow_category_result": "Could have",
+      "feature_recommendation_justification": "The feature is categorized as 'Could have' because, while it has a significant impact on workflow, the urgency is moderate, indicating it can be prioritized after more critical improvements.",
+      "user_story": "As a project manager, I want improved board loading performance during sprint planning, so that I can efficiently manage tasks.",
+      "complexity_factors": {
+        "backend_changes": 1,
+        "frontend_changes": 0,
+        "data_model_changes": 0,
+        "security_constraints": 0,
+        "integration_dependencies": 0
+      },
+      "development_complexity_estimation": "Low",
+      "feature_acceptance_criteria": [
+        "A user can load the project board in under 3 seconds during sprint planning.",
+        "The system ensures all tasks are displayed accurately after the board loads.",
+        "The system maintains performance with over 500 tasks on the board."
+      ]
+    }
+  },
+  {
+    "id": 7,
+    "input": {
+      "user": "Claire_Petit",
+      "comment": "We need recurring tasks for weekly standup preparation and monthly reporting."
+    },
+    "expected_output": {
+      "feature_type": "feature_request",
+      "feature": "recurring tasks for standup and reporting",
+      "impact": "4",
+      "urgency": "3",
+      "impact_justification": "The feature has a major workflow impact as it addresses the need for recurring tasks for weekly standup preparation and monthly reporting.",
+      "urgency_justification": "The urgency score reflects a recurring issue that is manageable in the short term, as the current process can continue without immediate changes.",
+      "feature_priority_score": 3.4,
+      "moscow_category_result": "Could have",
+      "feature_recommendation_justification": "The feature is categorized as 'Could have' because, while it has a significant impact on workflow, the urgency is moderate, indicating it can be prioritized after more critical features.",
+      "user_story": "As a team member, I want recurring tasks for standup and reporting, so that I can streamline my preparation workflow.",
+      "complexity_factors": {
+        "backend_changes": 1,
+        "frontend_changes": 1,
+        "data_model_changes": 1,
+        "security_constraints": 0,
+        "integration_dependencies": 0
+      },
+      "development_complexity_estimation": "Medium",
+      "feature_acceptance_criteria": [
+        "A user can create recurring tasks for weekly standup preparation and monthly reporting.",
+        "The system must allow users to edit or delete recurring tasks at any time.",
+        "The system should notify users of upcoming recurring tasks 24 hours in advance."
+      ]
+    }
+  },
+  {
+    "id": 8,
+    "input": {
+      "user": "Hugo_Morel",
+      "comment": "File attachments disappear from some tasks after refreshing the page."
+    },
+    "expected_output": {
+      "feature_type": "bug_report",
+      "feature": "File attachments disappearing after refresh",
+      "impact": "4",
+      "urgency": "4",
+      "impact_justification": "The feature has a major workflow impact as file attachments disappearing disrupts task management.",
+      "urgency_justification": "This is a frequent problem needing near-term action since it affects user experience regularly.",
+      "feature_priority_score": 4.0,
+      "moscow_category_result": "Should have",
+      "feature_recommendation_justification": "The feature should be prioritized as 'Should have' due to its significant impact and urgency, both rated at 4, indicating it is important for user satisfaction.",
+      "user_story": "As a user, I want file attachments to remain visible after refreshing the page, so that I can access my documents without issues.",
+      "complexity_factors": {
+        "backend_changes": 1,
+        "frontend_changes": 1,
+        "data_model_changes": 0,
+        "security_constraints": 0,
+        "integration_dependencies": 0
+      },
+      "development_complexity_estimation": "Low",
+      "feature_acceptance_criteria": [
+        "A user can see all file attachments after refreshing the page.",
+        "The system must retain file attachments for each task during page refresh.",
+        "The system should display an error message if attachments fail to load after refresh."
+      ]
+    }
+  },
+  {
+    "id": 9,
+    "input": {
+      "user": "Lea_Robert",
+      "comment": "The calendar view is useful, but moving tasks between dates takes too many clicks."
+    },
+    "expected_output": {
+      "feature_type": "improvement",
+      "feature": "Reduce clicks for moving tasks in calendar view",
+      "impact": "3",
+      "urgency": "3",
+      "impact_justification": "The feature reduces moderate inefficiency in moving tasks between dates in the calendar view.",
+      "urgency_justification": "The issue is recurring but manageable in the short term, requiring some attention to improve user experience.",
+      "feature_priority_score": 3.0,
+      "moscow_category_result": "Could have",
+      "feature_recommendation_justification": "The feature is categorized as 'Could have' due to its moderate impact and urgency, indicating it should be prioritized for improvement without immediate necessity.",
+      "user_story": "As a user, I want to reduce clicks for moving tasks in calendar view, so that I can manage my tasks more efficiently.",
+      "complexity_factors": {
+        "backend_changes": 1,
+        "frontend_changes": 1,
+        "data_model_changes": 0,
+        "security_constraints": 0,
+        "integration_dependencies": 0
+      },
+      "development_complexity_estimation": "Low",
+      "feature_acceptance_criteria": [
+        "A user can move tasks between dates with a single click in the calendar view.",
+        "The system ensures that tasks cannot be moved to invalid dates.",
+        "The system maintains task integrity when multiple users are updating the calendar simultaneously."
+      ]
+    }
+  },
+  {
+    "id": 10,
+    "input": {
+      "user": "Thomas_Girard",
+      "comment": "Please add an approval workflow so finance tasks cannot be closed before manager review."
+    },
+    "expected_output": {
+      "feature_type": "feature_request",
+      "feature": "Approval workflow for finance tasks",
+      "impact": "4",
+      "urgency": "3",
+      "impact_justification": "The approval workflow for finance tasks has a major workflow impact as it ensures that tasks cannot be closed before manager review, which is crucial for compliance and oversight.",
+      "urgency_justification": "The urgency score reflects that while the issue is recurring and manageable in the short term, it still requires attention to prevent potential inefficiencies in the finance process.",
+      "feature_priority_score": 3.4,
+      "moscow_category_result": "Could have",
+      "feature_recommendation_justification": "Given the major workflow impact and manageable urgency, prioritizing this feature as 'Could have' is justified to enhance operational efficiency without immediate pressure.",
+      "user_story": "As a finance manager, I want an approval workflow for finance tasks, so that tasks cannot be closed before manager review.",
+      "complexity_factors": {
+        "backend_changes": 1,
+        "frontend_changes": 1,
+        "data_model_changes": 0,
+        "security_constraints": 1,
+        "integration_dependencies": 0
+      },
+      "development_complexity_estimation": "Medium",
+      "feature_acceptance_criteria": [
+        "A user can submit finance tasks for approval before closure.",
+        "The system prevents closure of finance tasks without manager approval.",
+        "The system notifies users of pending approvals for finance tasks."
+      ]
+    }
+  },
+  {
+    "id": 11,
+    "input": {
+      "user": "Maya_Nguyen",
+      "comment": "Comments are sometimes posted twice when I click submit once."
+    },
+    "expected_output": {
+      "feature_type": "bug_report",
+      "feature": "Duplicate comment submissions",
+      "impact": "3",
+      "urgency": "3",
+      "impact_justification": "The duplicate comment submissions create a moderate inefficiency in user interactions, impacting the overall user experience.",
+      "urgency_justification": "This is a recurring issue that is manageable in the short term, but it still requires attention to prevent user frustration.",
+      "feature_priority_score": 3.0,
+      "moscow_category_result": "Could have",
+      "feature_recommendation_justification": "The feature should be prioritized as 'Could have' since it has a moderate impact and urgency, indicating that while it is not critical, addressing it would enhance user satisfaction.",
+      "user_story": "As a user, I want to prevent duplicate comment submissions, so that my comments are posted only once.",
+      "complexity_factors": {
+        "backend_changes": 1,
+        "frontend_changes": 0,
+        "data_model_changes": 0,
+        "security_constraints": 0,
+        "integration_dependencies": 0
+      },
+      "development_complexity_estimation": "Low",
+      "feature_acceptance_criteria": [
+        "A user can submit a comment once without duplicates appearing.",
+        "The system prevents multiple submissions of the same comment within a short time frame.",
+        "The system displays a notification if a duplicate comment submission is attempted."
+      ]
+    }
+  },
+  {
+    "id": 12,
+    "input": {
+      "user": "Ibrahim_Khan",
+      "comment": "The mobile task list works, but it is hard to read because spacing is too tight."
+    },
+    "expected_output": {
+      "feature_type": "improvement",
+      "feature": "Improve spacing in mobile task list",
+      "impact": "3",
+      "urgency": "2",
+      "impact_justification": "The feature's impact score of 3 indicates a moderate inefficiency in the mobile task list due to tight spacing, as noted in the comment.",
+      "urgency_justification": "The urgency score of 2 reflects that the issue is an occasional inconvenience with a workaround available, according to the comment.",
+      "feature_priority_score": 2.4,
+      "moscow_category_result": "Won't have for now",
+      "feature_recommendation_justification": "Given the moderate impact and low urgency, prioritizing this feature as 'Won't have for now' is justified, as it does not pose an immediate risk and can be addressed later.",
+      "user_story": "As a mobile user, I want improved spacing in the task list, so that I can read tasks more easily.",
+      "complexity_factors": {
+        "backend_changes": 0,
+        "frontend_changes": 1,
+        "data_model_changes": 0,
+        "security_constraints": 0,
+        "integration_dependencies": 0
+      },
+      "development_complexity_estimation": "Low",
+      "feature_acceptance_criteria": [
+        "A user can view the task list with improved spacing for better readability.",
+        "The system ensures that spacing is consistent across all mobile devices.",
+        "The system maintains performance while displaying the updated task list layout."
+      ]
+    }
+  },
+  {
+    "id": 13,
+    "input": {
+      "user": "Emma_Rossi",
+      "comment": "We need private projects so confidential client work is hidden from other teams."
+    },
+    "expected_output": {
+      "feature_type": "feature_request",
+      "feature": "private projects for confidential client work",
+      "impact": "5",
+      "urgency": "4",
+      "impact_justification": "The need for private projects to hide confidential client work indicates a security risk or blocking core functionality, justifying the impact score of 5.",
+      "urgency_justification": "The frequent need for this feature to protect sensitive information necessitates near-term action, which supports the urgency score of 4.",
+      "feature_priority_score": 4.4,
+      "moscow_category_result": "Should have",
+      "feature_recommendation_justification": "Given the high impact and urgency scores, prioritizing this feature as a 'Should have' is essential to mitigate security risks and enhance workflow efficiency.",
+      "user_story": "As a project manager, I want private projects for confidential client work, so that sensitive information is protected from other teams.",
+      "complexity_factors": {
+        "backend_changes": 1,
+        "frontend_changes": 1,
+        "data_model_changes": 1,
+        "security_constraints": 1,
+        "integration_dependencies": 0
+      },
+      "development_complexity_estimation": "Medium",
+      "feature_acceptance_criteria": [
+        "A user can create a private project that is only visible to selected team members.",
+        "The system must restrict access to private projects based on user permissions.",
+        "The system should maintain project confidentiality even during system updates or failures."
+      ]
+    }
+  },
+  {
+    "id": 14,
+    "input": {
+      "user": "Victor_Hamel",
+      "comment": "Exporting a report to CSV fails whenever the project contains archived tasks."
+    },
+    "expected_output": {
+      "feature_type": "bug_report",
+      "feature": "Export report to CSV fails with archived tasks",
+      "impact": "4",
+      "urgency": "4",
+      "impact_justification": "The bug report indicates a major workflow impact as exporting reports is a critical function that fails when archived tasks are present.",
+      "urgency_justification": "The issue is frequent and requires near-term action to ensure users can successfully export reports without errors.",
+      "feature_priority_score": 4.0,
+      "moscow_category_result": "Should have",
+      "feature_recommendation_justification": "The feature should be prioritized as 'Should have' due to its significant impact on workflows and the urgency for resolution, reflected in the high feature priority score.",
+      "user_story": "As a user, I want to export reports to CSV without errors, so that I can efficiently manage projects with archived tasks.",
+      "complexity_factors": {
+        "backend_changes": 1,
+        "frontend_changes": 0,
+        "data_model_changes": 0,
+        "security_constraints": 0,
+        "integration_dependencies": 0
+      },
+      "development_complexity_estimation": "Low",
+      "feature_acceptance_criteria": [
+        "A user can successfully export a report to CSV even if it contains archived tasks.",
+        "The system validates that archived tasks do not prevent CSV export functionality.",
+        "The system handles errors gracefully when attempting to export reports with archived tasks."
+      ]
+    }
+  },
+  {
+    "id": 15,
+    "input": {
+      "user": "Alicia_Santos",
+      "comment": "Notification settings are confusing; users need clearer labels for email and in-app alerts."
+    },
+    "expected_output": {
+      "feature_type": "improvement",
+      "feature": "Clearer labels for notification settings",
+      "impact": "3",
+      "urgency": "3",
+      "impact_justification": "The impact score of 3 indicates that the feature addresses a moderate inefficiency in the notification settings, as users find them confusing due to unclear labels.",
+      "urgency_justification": "The urgency score of 3 reflects that while the issue is recurring, it is manageable in the short term and does not pose an immediate risk to users.",
+      "feature_priority_score": 3.0,
+      "moscow_category_result": "Could have",
+      "feature_recommendation_justification": "The feature should be prioritized as 'Could have' because it addresses a moderate inefficiency and has a manageable urgency, making it a valuable improvement without immediate necessity.",
+      "user_story": "As a user, I want clearer labels for notification settings, so that I can easily understand my alert preferences.",
+      "complexity_factors": {
+        "backend_changes": 0,
+        "frontend_changes": 1,
+        "data_model_changes": 0,
+        "security_constraints": 0,
+        "integration_dependencies": 0
+      },
+      "development_complexity_estimation": "Low",
+      "feature_acceptance_criteria": [
+        "A user can see updated labels for email notifications in the settings menu.",
+        "The system must ensure all notification labels are clear and descriptive.",
+        "A user can access the updated notification settings without any errors."
+      ]
+    }
+  },
+  {
+    "id": 16,
+    "input": {
+      "user": "Noah_Wilson",
+      "comment": "Please add Slack notifications when high-priority tasks are assigned."
+    },
+    "expected_output": {
+      "feature_type": "feature_request",
+      "feature": "Slack notifications for high-priority tasks",
+      "impact": "4",
+      "urgency": "3",
+      "impact_justification": "The feature has a major workflow impact as it facilitates timely communication for high-priority tasks.",
+      "urgency_justification": "The urgency score reflects a recurring issue that is manageable in the short term, indicating that while important, it is not immediately critical.",
+      "feature_priority_score": 3.4,
+      "moscow_category_result": "Could have",
+      "feature_recommendation_justification": "Given the major impact and manageable urgency, prioritizing this feature as 'Could have' aligns with its potential to enhance workflow without being an immediate necessity.",
+      "user_story": "As a user, I want Slack notifications for high-priority tasks, so that I can stay informed about important assignments.",
+      "complexity_factors": {
+        "backend_changes": 1,
+        "frontend_changes": 0,
+        "data_model_changes": 0,
+        "security_constraints": 0,
+        "integration_dependencies": 1
+      },
+      "development_complexity_estimation": "Low",
+      "feature_acceptance_criteria": [
+        "A user can receive a Slack notification when a high-priority task is assigned to them.",
+        "The system must ensure notifications are sent only for tasks marked as high-priority.",
+        "The system should handle notification failures gracefully without impacting task assignment."
+      ]
+    }
+  },
+  {
+    "id": 17,
+    "input": {
+      "user": "Fatima_Ali",
+      "comment": "The login page sometimes shows a blank screen after entering the correct password."
+    },
+    "expected_output": {
+      "feature_type": "bug_report",
+      "feature": "Blank screen on login page after password entry",
+      "impact": "4",
+      "urgency": "4",
+      "impact_justification": "The blank screen on the login page after password entry has a major workflow impact as it disrupts user access to the application.",
+      "urgency_justification": "This issue is frequent and needs near-term action to prevent user frustration and potential loss of access.",
+      "feature_priority_score": 4.0,
+      "moscow_category_result": "Should have",
+      "feature_recommendation_justification": "The feature should be prioritized as 'Should have' because it has a significant impact and urgency score of 4, indicating it is important for user experience but not critical.",
+      "user_story": "As a user, I want to resolve the blank screen issue on the login page, so that I can successfully log in without interruptions.",
+      "complexity_factors": {
+        "backend_changes": 1,
+        "frontend_changes": 1,
+        "data_model_changes": 0,
+        "security_constraints": 0,
+        "integration_dependencies": 0
+      },
+      "development_complexity_estimation": "Low",
+      "feature_acceptance_criteria": [
+        "A user can enter their password and see the dashboard without encountering a blank screen.",
+        "The system must display an error message if login fails instead of showing a blank screen.",
+        "The system should maintain consistent login behavior under high traffic conditions without errors."
+      ]
+    }
+  },
+  {
+    "id": 18,
+    "input": {
+      "user": "Camille_Durand",
+      "comment": "Project templates are helpful, but creating one from an existing project should be easier."
+    },
+    "expected_output": {
+      "feature_type": "improvement",
+      "feature": "Easier creation of project templates from existing projects",
+      "impact": "3",
+      "urgency": "2",
+      "impact_justification": "The impact score of 3 reflects a moderate inefficiency in creating project templates from existing projects, as noted in the comment.",
+      "urgency_justification": "The urgency score of 2 indicates that while there is an occasional issue with the current process, a workaround is available, as mentioned in the comment.",
+      "feature_priority_score": 2.4,
+      "moscow_category_result": "Won't have for now",
+      "feature_recommendation_justification": "The feature is categorized as 'Won't have for now' due to its moderate impact and low urgency, suggesting that it can be deprioritized in favor of more critical improvements.",
+      "user_story": "As a project manager, I want easier creation of project templates from existing projects, so that I can save time and effort.",
+      "complexity_factors": {
+        "backend_changes": 1,
+        "frontend_changes": 1,
+        "data_model_changes": 0,
+        "security_constraints": 0,
+        "integration_dependencies": 0
+      },
+      "development_complexity_estimation": "Low",
+      "feature_acceptance_criteria": [
+        "A user can create a new project template from an existing project with a single click.",
+        "The system must validate that the existing project is complete before allowing template creation.",
+        "The system should maintain performance when creating templates from large projects without errors."
+      ]
+    }
+  },
+  {
+    "id": 19,
+    "input": {
+      "user": "Julien_Mercier",
+      "comment": "Please add dependency tracking so teams can see which tasks are blocked by other tasks."
+    },
+    "expected_output": {
+      "feature_type": "feature_request",
+      "feature": "dependency tracking for tasks",
+      "impact": "4",
+      "urgency": "3",
+      "impact_justification": "The impact score of 4 reflects that dependency tracking for tasks will have a major workflow impact by allowing teams to see which tasks are blocked by others.",
+      "urgency_justification": "The urgency score of 3 indicates that while the need for dependency tracking is a recurring issue, it is manageable in the short term without immediate action.",
+      "feature_priority_score": 3.4,
+      "moscow_category_result": "Could have",
+      "feature_recommendation_justification": "The feature should be prioritized as 'Could have' because it has a significant impact on workflows and a manageable urgency, resulting in a moderate feature priority score.",
+      "user_story": "As a team member, I want dependency tracking for tasks, so that I can identify which tasks are blocked by others.",
+      "complexity_factors": {
+        "backend_changes": 1,
+        "frontend_changes": 1,
+        "data_model_changes": 1,
+        "security_constraints": 0,
+        "integration_dependencies": 0
+      },
+      "development_complexity_estimation": "Medium",
+      "feature_acceptance_criteria": [
+        "A user can view a list of tasks and their dependencies clearly.",
+        "The system must notify users when a task is blocked by another task.",
+        "The system should update task statuses in real-time as dependencies change."
+      ]
+    }
+  },
+  {
+    "id": 20,
+    "input": {
+      "user": "Sarah_Lemoine",
+      "comment": "The password reset email fails to arrive for several users who are locked out."
+    },
+    "expected_output": {
+      "feature_type": "bug_report",
+      "feature": "Password reset email delivery failure",
+      "impact": "5",
+      "urgency": "5",
+      "impact_justification": "The password reset email delivery failure is a security risk and blocks core functionality for users who are locked out.",
+      "urgency_justification": "This issue is immediate, causing active risk and blocking users from accessing their accounts.",
+      "feature_priority_score": 5.0,
+      "moscow_category_result": "Must have",
+      "feature_recommendation_justification": "This feature should be prioritized as a 'Must have' due to its critical impact on security and user access, coupled with its high urgency.",
+      "user_story": "As a user, I want the password reset email to be delivered reliably, so that I can regain access to my account quickly.",
+      "complexity_factors": {
+        "backend_changes": 1,
+        "frontend_changes": 0,
+        "data_model_changes": 0,
+        "security_constraints": 1,
+        "integration_dependencies": 1
+      },
+      "development_complexity_estimation": "Medium",
+      "feature_acceptance_criteria": [
+        "A user can receive the password reset email within 5 minutes of requesting it.",
+        "The system must validate that the email address is registered before sending the reset email.",
+        "The system should log an error if the email fails to send, notifying the admin."
+      ]
+    }
+  },
+  {
+    "id": 21,
+    "input": {
+      "user": "Matteo_Ricci",
+      "comment": "We want to improve the task creation form because it has too many required fields."
+    },
+    "expected_output": {
+      "feature_type": "improvement",
+      "feature": "Simplify task creation form by reducing required fields",
+      "impact": "3",
+      "urgency": "2",
+      "impact_justification": "The impact score of 3 reflects a moderate inefficiency in the task creation process due to too many required fields.",
+      "urgency_justification": "The urgency score of 2 indicates that this is an occasional issue with a workaround available, allowing for some flexibility in addressing it.",
+      "feature_priority_score": 2.4,
+      "moscow_category_result": "Won't have for now",
+      "feature_recommendation_justification": "Given the moderate impact and low urgency, prioritizing this feature as 'Won't have for now' is justified as it does not require immediate attention.",
+      "user_story": "As a user, I want to simplify the task creation form by reducing required fields, so that I can create tasks more efficiently.",
+      "complexity_factors": {
+        "backend_changes": 1,
+        "frontend_changes": 1,
+        "data_model_changes": 0,
+        "security_constraints": 0,
+        "integration_dependencies": 0
+      },
+      "development_complexity_estimation": "Low",
+      "feature_acceptance_criteria": [
+        "A user can create a task with fewer required fields than before.",
+        "The system must validate that all remaining required fields are filled before submission.",
+        "The system should display an error message if required fields are missing during task creation."
+      ]
+    }
+  },
+  {
+    "id": 22,
+    "input": {
+      "user": "Ana_Garcia",
+      "comment": "Please add workload capacity planning so managers can avoid assigning too much work to one person."
+    },
+    "expected_output": {
+      "feature_type": "feature_request",
+      "feature": "workload capacity planning",
+      "impact": "4",
+      "urgency": "3",
+      "impact_justification": "The impact score of 4 reflects that workload capacity planning will have a major workflow impact by helping managers avoid overloading employees.",
+      "urgency_justification": "The urgency score of 3 indicates that while the issue is recurring, it is manageable in the short term, allowing for a moderate response time.",
+      "feature_priority_score": 3.4,
+      "moscow_category_result": "Could have",
+      "feature_recommendation_justification": "The feature should be prioritized as 'Could have' because it has a significant impact on workflow and a manageable urgency, making it a valuable enhancement without immediate necessity.",
+      "user_story": "As a manager, I want workload capacity planning, so that I can avoid overloading team members with tasks.",
+      "complexity_factors": {
+        "backend_changes": 1,
+        "frontend_changes": 1,
+        "data_model_changes": 1,
+        "security_constraints": 0,
+        "integration_dependencies": 0
+      },
+      "development_complexity_estimation": "Medium",
+      "feature_acceptance_criteria": [
+        "A user can view individual workload capacity to prevent task overload.",
+        "The system must alert managers when a team member's workload exceeds capacity.",
+        "The system should update workload capacity in real-time as tasks are assigned."
+      ]
+    }
+  },
+  {
+    "id": 23,
+    "input": {
+      "user": "Paul_Dubois",
+      "comment": "The activity feed shows deleted tasks as if they were still active."
+    },
+    "expected_output": {
+      "feature_type": "bug_report",
+      "feature": "Deleted tasks shown as active in activity feed",
+      "impact": "4",
+      "urgency": "3",
+      "impact_justification": "The bug of showing deleted tasks as active in the activity feed has a major workflow impact, affecting user experience significantly.",
+      "urgency_justification": "This issue is recurring but manageable in the short term, indicating a moderate level of urgency.",
+      "feature_priority_score": 3.4,
+      "moscow_category_result": "Could have",
+      "feature_recommendation_justification": "The feature should be prioritized as 'Could have' because, while it has a significant impact and moderate urgency, it does not block core functionality and can be addressed later.",
+      "user_story": "As a user, I want deleted tasks to be shown as inactive in the activity feed, so that I can see accurate task statuses.",
+      "complexity_factors": {
+        "backend_changes": 1,
+        "frontend_changes": 1,
+        "data_model_changes": 0,
+        "security_constraints": 0,
+        "integration_dependencies": 0
+      },
+      "development_complexity_estimation": "Low",
+      "feature_acceptance_criteria": [
+        "A user can see only active tasks in the activity feed after deletion.",
+        "The system must remove deleted tasks from the activity feed immediately.",
+        "The system should display a notification if tasks are deleted successfully."
+      ]
+    }
+  },
+  {
+    "id": 24,
+    "input": {
+      "user": "Lina_Schmidt",
+      "comment": "We want to improve the onboarding checklist so new users understand setup steps faster."
+    },
+    "expected_output": {
+      "feature_type": "improvement",
+      "feature": "enhanced onboarding checklist",
+      "impact": "3",
+      "urgency": "3",
+      "impact_justification": "The enhanced onboarding checklist addresses moderate inefficiency in user setup, as indicated by the comment.",
+      "urgency_justification": "The urgency score reflects a recurring issue that is manageable in the short term, as new users need to understand setup steps faster.",
+      "feature_priority_score": 3.0,
+      "moscow_category_result": "Could have",
+      "feature_recommendation_justification": "The feature is categorized as 'Could have' due to its moderate impact and urgency, suggesting it should be prioritized but is not critical at this time.",
+      "user_story": "As a new user, I want an enhanced onboarding checklist, so that I can understand setup steps faster.",
+      "complexity_factors": {
+        "backend_changes": 1,
+        "frontend_changes": 1,
+        "data_model_changes": 0,
+        "security_constraints": 0,
+        "integration_dependencies": 0
+      },
+      "development_complexity_estimation": "Low",
+      "feature_acceptance_criteria": [
+        "A user can view a step-by-step onboarding checklist during the setup process.",
+        "The system must highlight completed steps in the onboarding checklist.",
+        "The system should provide tooltips for each step in the onboarding checklist."
+      ]
+    }
+  },
+  {
+    "id": 25,
+    "input": {
+      "user": "George_Brown",
+      "comment": "Please add time tracking on tasks so consultants can report billable hours."
+    },
+    "expected_output": {
+      "feature_type": "feature_request",
+      "feature": "time tracking on tasks",
+      "impact": "4",
+      "urgency": "3",
+      "impact_justification": "The request for time tracking on tasks has a major workflow impact as it enables consultants to accurately report billable hours.",
+      "urgency_justification": "The need for time tracking is a recurring issue that is manageable in the short term, indicating a moderate urgency.",
+      "feature_priority_score": 3.4,
+      "moscow_category_result": "Could have",
+      "feature_recommendation_justification": "The feature should be prioritized as 'Could have' because it has a significant impact on workflow and a moderate urgency, with a feature priority score of 3.4.",
+      "user_story": "As a consultant, I want time tracking on tasks, so that I can accurately report billable hours.",
+      "complexity_factors": {
+        "backend_changes": 1,
+        "frontend_changes": 1,
+        "data_model_changes": 1,
+        "security_constraints": 0,
+        "integration_dependencies": 0
+      },
+      "development_complexity_estimation": "Medium",
+      "feature_acceptance_criteria": [
+        "A user can log billable hours for each task they work on.",
+        "The system prevents users from logging hours beyond the task's total duration.",
+        "The system accurately updates total billable hours when tasks are modified."
+      ]
+    }
+  },
+  {
+    "id": 26,
+    "input": {
+      "user": "Elise_Bernard",
+      "comment": "The gantt chart freezes when a project has long task dependencies."
+    },
+    "expected_output": {
+      "feature_type": "bug_report",
+      "feature": "Gantt chart freezing with long task dependencies",
+      "impact": "4",
+      "urgency": "4",
+      "impact_justification": "The Gantt chart freezing with long task dependencies has a major workflow impact, as it disrupts project management tasks.",
+      "urgency_justification": "This bug is a frequent problem needing near-term action, as it affects users regularly when managing projects.",
+      "feature_priority_score": 4.0,
+      "moscow_category_result": "Should have",
+      "feature_recommendation_justification": "The feature should be prioritized as 'Should have' due to its significant impact on workflows and the urgency of addressing a frequent issue.",
+      "user_story": "As a project manager, I want the Gantt chart to function without freezing, so that I can manage long task dependencies effectively.",
+      "complexity_factors": {
+        "backend_changes": 1,
+        "frontend_changes": 1,
+        "data_model_changes": 0,
+        "security_constraints": 0,
+        "integration_dependencies": 0
+      },
+      "development_complexity_estimation": "Low",
+      "feature_acceptance_criteria": [
+        "A user can view long task dependencies in the Gantt chart without freezing.",
+        "The system must maintain performance when displaying projects with extensive task dependencies.",
+        "The system should recover gracefully from any freezing incidents during Gantt chart usage."
+      ]
+    }
+  },
+  {
+    "id": 27,
+    "input": {
+      "user": "Rania_Haddad",
+      "comment": "We want to improve bulk task editing because updating many tasks one by one takes too long."
+    },
+    "expected_output": {
+      "feature_type": "improvement",
+      "feature": "bulk task editing",
+      "impact": "3",
+      "urgency": "3",
+      "impact_justification": "The impact score of 3 reflects a moderate inefficiency in the workflow due to the time-consuming nature of updating tasks individually.",
+      "urgency_justification": "The urgency score of 3 indicates a recurring issue that is manageable in the short term, but still requires attention to improve efficiency.",
+      "feature_priority_score": 3.0,
+      "moscow_category_result": "Could have",
+      "feature_recommendation_justification": "The feature should be prioritized as 'Could have' because while it addresses a moderate inefficiency and has a manageable urgency, it does not pose an immediate risk or major workflow disruption.",
+      "user_story": "As a task manager, I want bulk task editing, so that I can save time when updating multiple tasks.",
+      "complexity_factors": {
+        "backend_changes": 1,
+        "frontend_changes": 1,
+        "data_model_changes": 0,
+        "security_constraints": 0,
+        "integration_dependencies": 0
+      },
+      "development_complexity_estimation": "Low",
+      "feature_acceptance_criteria": [
+        "A user can select multiple tasks and edit them simultaneously.",
+        "The system must validate that all selected tasks are eligible for bulk editing.",
+        "The system should maintain performance when editing over 100 tasks at once."
+      ]
+    }
+  },
+  {
+    "id": 28,
+    "input": {
+      "user": "Kevin_Lambert",
+      "comment": "Please add saved filter views so users can reuse their favorite backlog filters."
+    },
+    "expected_output": {
+      "feature_type": "feature_request",
+      "feature": "saved filter views for backlog",
+      "impact": "3",
+      "urgency": "2",
+      "impact_justification": "The impact score of 3 reflects a moderate inefficiency in user experience due to the lack of saved filter views for backlog.",
+      "urgency_justification": "The urgency score of 2 indicates that while the issue is an occasional inconvenience, there are workarounds available for users.",
+      "feature_priority_score": 2.4,
+      "moscow_category_result": "Won't have for now",
+      "feature_recommendation_justification": "Given the moderate impact and low urgency, prioritizing this feature as 'Won't have for now' is justified as it does not pose an immediate need for development.",
+      "user_story": "As a user, I want saved filter views for backlog, so that I can reuse my favorite filters easily.",
+      "complexity_factors": {
+        "backend_changes": 1,
+        "frontend_changes": 1,
+        "data_model_changes": 1,
+        "security_constraints": 0,
+        "integration_dependencies": 0
+      },
+      "development_complexity_estimation": "Medium",
+      "feature_acceptance_criteria": [
+        "A user can save a filter view for future use in the backlog.",
+        "The system must allow users to name and edit saved filter views.",
+        "The system retains saved filter views even after user logout or session timeout."
+      ]
+    }
+  },
+  {
+    "id": 29,
+    "input": {
+      "user": "Yuki_Tanaka",
+      "comment": "The invite link expires immediately even when the expiration date is set for next week."
+    },
+    "expected_output": {
+      "feature_type": "bug_report",
+      "feature": "Invite link expiration issue",
+      "impact": "4",
+      "urgency": "5",
+      "impact_justification": "The invite link expiration issue has a major workflow impact as it disrupts user access to the system despite the expiration date being set correctly.",
+      "urgency_justification": "This bug is an immediate issue causing active risk by blocking users from accessing the invite link, necessitating urgent attention.",
+      "feature_priority_score": 4.6,
+      "moscow_category_result": "Must have",
+      "feature_recommendation_justification": "Given the major workflow impact and immediate urgency of the invite link expiration issue, it is essential to prioritize this feature as a 'Must have' to ensure user access and functionality.",
+      "user_story": "As a user, I want the invite link expiration to function correctly, so that I can access it until the intended date.",
+      "complexity_factors": {
+        "backend_changes": 1,
+        "frontend_changes": 0,
+        "data_model_changes": 0,
+        "security_constraints": 0,
+        "integration_dependencies": 0
+      },
+      "development_complexity_estimation": "Low",
+      "feature_acceptance_criteria": [
+        "A user can generate an invite link that remains valid until the specified expiration date.",
+        "The system must ensure that the invite link does not expire immediately upon creation.",
+        "The system should notify users if the invite link is about to expire within 24 hours."
+      ]
+    }
+  },
+  {
+    "id": 30,
+    "input": {
+      "user": "Mila_Anders",
+      "comment": "We want to improve the project timeline view so milestones are easier to scan."
+    },
+    "expected_output": {
+      "feature_type": "improvement",
+      "feature": "enhanced project timeline view for better milestone scanning",
+      "impact": "3",
+      "urgency": "2",
+      "impact_justification": "The impact score of 3 reflects a moderate inefficiency in the project timeline view, which affects users' ability to scan milestones effectively.",
+      "urgency_justification": "The urgency score of 2 indicates that while there is an occasional issue with the current timeline view, workarounds are available for users.",
+      "feature_priority_score": 2.4,
+      "moscow_category_result": "Won't have for now",
+      "feature_recommendation_justification": "Given the moderate impact and low urgency, the feature is categorized as 'Won't have for now' as it does not require immediate attention despite its potential to improve user experience.",
+      "user_story": "As a project manager, I want an enhanced project timeline view for better milestone scanning, so that I can quickly assess project progress.",
+      "complexity_factors": {
+        "backend_changes": 1,
+        "frontend_changes": 1,
+        "data_model_changes": 0,
+        "security_constraints": 0,
+        "integration_dependencies": 0
+      },
+      "development_complexity_estimation": "Low",
+      "feature_acceptance_criteria": [
+        "A user can easily identify milestones on the project timeline view.",
+        "The system highlights upcoming milestones distinctly from past milestones.",
+        "The system maintains performance when displaying timelines with numerous milestones."
+      ]
+    }
+  }
+]

@@ -6,7 +6,7 @@ from dataclasses import asdict
 from pathlib import Path
 
 # Command to run the file:
-# uv run python tests/run_full_pipeline.py
+# python tests/run_full_pipeline.py
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 SRC_PATH = PROJECT_ROOT / "src"
@@ -20,7 +20,7 @@ from user_story_generator_agent.services.orchestrator import (  # noqa: E402
 
 if __name__ == "__main__":
     dataset_item = get_dataset_item(
-        comment_id=1,
+        comment_id=3,
         dataset_path=PROJECT_ROOT / "1_Data" / "agent_1_dataset.json",
     )
     result = analyze_feedback_from_dataset(
