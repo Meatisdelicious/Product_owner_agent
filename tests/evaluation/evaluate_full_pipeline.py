@@ -10,6 +10,8 @@ from typing import Any
 # Command to run the file:
 # uv run python tests/evaluation/evaluate_full_pipeline.py
 
+
+# Running evalutation on a dataset of 30 pairs (comment-expected output)
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 SRC_PATH = PROJECT_ROOT / "src"
 sys.path.insert(0, str(SRC_PATH))
