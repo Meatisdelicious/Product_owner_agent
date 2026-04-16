@@ -44,4 +44,18 @@ Output 1:
 
 
 Complete final output for the user : 
-final_output : 
+Final output :
+
+- feature_type
+- feature
+- impact
+- urgency
+- impact_justification
+- urgency_justification
+- feature_priority_score
+- moscow_category_result
+- feature_recommendation_justification
+- user_story
+- complexity_factors
+- development_complexity_estimation
+- feature_acceptance_criteria
