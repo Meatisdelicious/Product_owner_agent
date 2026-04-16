@@ -152,7 +152,7 @@ tests/
   Inference scripts and evaluation helpers
 ```
 
-## Output Model
+## Model Output
 
 The final pipeline output includes:
 
@@ -172,7 +172,7 @@ development_complexity_estimation
 feature_acceptance_criteria
 ```
 
-## Notes
+## Scoring abstract
 
 The priority score is deterministic:
 
