@@ -8,4 +8,5 @@ dependencies = [
     "langchain-openai>=0.3.0",
     "openai>=1.82.0",
     "python-dotenv>=1.0.0",
+    "streamlit>=1.44.0",
 ]
