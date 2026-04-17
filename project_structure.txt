@@ -1,5 +1,9 @@
 .
 ├── 1_Data
+│   ├── readme_imgs
+│   │   ├── final_result_with_ui_example.png
+│   │   ├── metrics_large_dataset.png
+│   │   └── start_page.png
 │   ├── agent_1_dataset.json
 │   ├── agent_2.1_dataset.json
 │   ├── agent_2.2_dataset.json
@@ -8,20 +12,19 @@
 │   └── full_pipeline_small_dataset.json
 ├── 2_documentation
 │   ├── architecture_diagrams
+│   │   ├── agent_1_architecture.md
+│   │   ├── agent_2_architecture.md
+│   │   ├── agent_3_architecture.md
+│   │   └── full_pipeline_architecture.md
 │   ├── technical_documentation
 │   │   ├── agent_1_architecture_example.md
 │   │   ├── agent_2_architecture_example.md
 │   │   ├── agent_3_architecture_example.md
 │   │   ├── full_pipeline_specifications_specs.md
 │   │   └── project_architecture_specs.md
-│   ├── agent_1_architecture.md
-│   ├── agent_2_architecture.md
-│   ├── agent_3_architecture.md
-│   ├── full_pipeline_architecture.md
 │   └── notes.py
 ├── src
 │   └── user_story_generator_agent
-│       ├── api
 │       ├── context
 │       │   └── criterias.py
 │       ├── services
@@ -50,7 +53,8 @@
 ├── .python-version
 ├── project_structure.txt
 ├── pyproject.toml
+├── README.md
 ├── technical_test_agent_builder_ai.md
 └── uv.lock
 
-14 directories, 40 files
+14 directories, 44 files
