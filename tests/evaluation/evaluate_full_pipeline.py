@@ -11,12 +11,12 @@ from typing import Any
 # uv run python tests/evaluation/evaluate_full_pipeline.py
 
 
-# Running evalutation on a dataset of 30 pairs (comment-expected output)
+# Running evaluation on a dataset of 30 pairs (comment-expected output).
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 SRC_PATH = PROJECT_ROOT / "src"
 sys.path.insert(0, str(SRC_PATH))
 
-from user_story_generator_agent.services.orchestrator import (
+from user_story_generator_agent.services.orchestrator import (  
     FeedbackInput,
     ProductOwnerAgent,
 )
@@ -40,6 +40,7 @@ COMPLEXITY_FACTOR_FIELDS = [
 
 
 def main() -> None:
+    """Evaluate the full pipeline against the configured dataset."""
     dataset = _load_dataset(DEFAULT_DATASET_PATH)
     agent = ProductOwnerAgent()
     results = []
@@ -58,15 +59,13 @@ def main() -> None:
 
 
 def _load_dataset(path: Path) -> list[dict[str, Any]]:
+    """Load evaluation cases from a JSON dataset file."""
     with path.open(encoding="utf-8") as dataset_file:
         return json.load(dataset_file)
 
 
-def _evaluate_item(
-    item_id: int,
-    expected: dict[str, Any],
-    predicted: dict[str, Any],
-) -> dict[str, Any]:
+def _evaluate_item(item_id: int,expected: dict[str, Any],predicted: dict[str, Any]) -> dict[str, Any]:
+    """Compare one expected output with one pipeline prediction."""
     exact_fields = [
         "feature_type",
         "moscow_category_result",
@@ -130,10 +129,8 @@ def _evaluate_item(
     }
 
 
-def _evaluate_complexity_factors(
-    expected: dict[str, Any],
-    predicted: dict[str, Any],
-) -> dict[str, Any]:
+def _evaluate_complexity_factors(expected: dict[str, Any],predicted: dict[str, Any]) -> dict[str, Any]:
+    """Calculate per-field and overall accuracy for complexity factors."""
     field_results = {
         field: int(expected[field]) == int(predicted[field])
         for field in COMPLEXITY_FACTOR_FIELDS
@@ -146,6 +143,7 @@ def _evaluate_complexity_factors(
 
 
 def _evaluate_acceptance_criteria(criteria: list[str]) -> dict[str, Any]:
+    """Check whether acceptance criteria match the expected output format."""
     count_pass = len(criteria) == 3
     prefix_pass = all(
         criterion.startswith("A user can") or criterion.startswith("The system")
@@ -163,6 +161,7 @@ def _evaluate_acceptance_criteria(criteria: list[str]) -> dict[str, Any]:
 
 
 def _print_report(results: list[dict[str, Any]]) -> None:
+    """Print aggregate evaluation metrics and failure details."""
     total = len(results)
     print("Full Pipeline Evaluation :")
     print("-------------------------")
@@ -231,16 +230,14 @@ def _print_report(results: list[dict[str, Any]]) -> None:
             print(f"- id={failure['id']}: {_failure_reasons(failure)}")
 
 
-def _print_exact_metric(
-    results: list[dict[str, Any]],
-    field: str,
-    label: str,
-) -> None:
+def _print_exact_metric(results: list[dict[str, Any]],field: str,label: str) -> None:
+    """Print accuracy for a field that must match exactly."""
     accuracy = _average(1.0 if result["exact"][field] else 0.0 for result in results)
     print(f"{label}: {_percent(accuracy)}")
 
 
 def _print_score_metric(results: list[dict[str, Any]], field: str) -> None:
+    """Print exact-match accuracy and mean absolute error for a numeric score."""
     exact_accuracy = _average(
         1.0 if result["scores"][field]["exact"] else 0.0 for result in results
     )
@@ -250,6 +247,7 @@ def _print_score_metric(results: list[dict[str, Any]], field: str) -> None:
 
 
 def _failure_reasons(result: dict[str, Any]) -> str:
+    """Build a readable summary of why one evaluation item failed."""
     reasons = []
     for field, passed in result["exact"].items():
         if not passed:
@@ -272,6 +270,7 @@ def _failure_reasons(result: dict[str, Any]) -> str:
 
 
 def _user_story_format_pass(value: str) -> bool:
+    """Return whether a user story follows the expected sentence structure."""
     normalized = value.strip()
     return (
         normalized.startswith("As ")
@@ -282,6 +281,7 @@ def _user_story_format_pass(value: str) -> bool:
 
 
 def _token_overlap(expected: str, predicted: str) -> float:
+    """Calculate the share of expected tokens present in the prediction."""
     expected_tokens = set(_tokens(expected))
     predicted_tokens = set(_tokens(predicted))
     if not expected_tokens:

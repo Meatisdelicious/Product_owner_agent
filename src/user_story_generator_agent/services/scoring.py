@@ -35,9 +35,13 @@ Generate justifications for the existing impact and urgency scores.
 Generate a recommendation justification for the computed MoSCoW category.
 
 Return only JSON with:
-- impact_justification: one concise sentence explaining the impact score using the comment, feature_type, feature, impact_criteria, and impact
-- urgency_justification: one concise sentence explaining the urgency score using the comment, feature_type, feature, urgency_criteria, and urgency
-- feature_recommendation_justification: one concise recommendation explaining why the feature should be prioritized as the provided moscow_category_result using the comment, impact, urgency, and feature_priority_score
+- impact_justification: one concise sentence explaining the impact score
+  using the comment, feature_type, feature, impact_criteria, and impact
+- urgency_justification: one concise sentence explaining the urgency score
+  using the comment, feature_type, feature, urgency_criteria, and urgency
+- feature_recommendation_justification: one concise recommendation explaining
+  why the feature should be prioritized as the provided moscow_category_result
+  using the comment, impact, urgency, and feature_priority_score
 
 Do not change the impact or urgency scores.
 Do not change the feature_priority_score or moscow_category_result.
@@ -47,6 +51,8 @@ Do not add user stories or explanations outside JSON.
 
 @dataclass(frozen=True)
 class ScoringInput:
+    """Evaluated feature passed to the scoring justification agent."""
+
     id: int
     user: str
     comment: str
@@ -58,6 +64,8 @@ class ScoringInput:
 
 @dataclass(frozen=True)
 class ScoringOutput:
+    """Scoring justifications and derived priority values from Agent 2.2."""
+
     impact_justification: str
     urgency_justification: str
     feature_priority_score: float
@@ -73,7 +81,10 @@ class _ScoringSchema(BaseModel):
         description="Concise justification for the existing urgency score."
     )
     feature_recommendation_justification: str = Field(
-        description="Concise recommendation justification for the computed MoSCoW category."
+        description=(
+            "Concise recommendation justification for the computed MoSCoW "
+            "category."
+        )
     )
 
 
@@ -86,11 +97,14 @@ SCORING_PROMPT = ChatPromptTemplate.from_messages(
 
 
 class FeatureScorer:
+    """Compute feature priority and generate score justifications."""
+
     def __init__(self, llm: Any | None = None) -> None:
         self.llm = llm or self._build_default_llm()
         self.chain = SCORING_PROMPT | self.llm.with_structured_output(_ScoringSchema)
 
     def score(self, scoring_input: ScoringInput) -> ScoringOutput:
+        """Score one evaluated feature and generate justifications."""
         feature_priority_score = _calculate_feature_priority_score(scoring_input)
         moscow_category_result = _calculate_moscow_category_result(
             feature_priority_score
@@ -109,7 +123,9 @@ class FeatureScorer:
             urgency_justification=payload.urgency_justification,
             feature_priority_score=feature_priority_score,
             moscow_category_result=moscow_category_result,
-            feature_recommendation_justification=payload.feature_recommendation_justification,
+            feature_recommendation_justification=(
+                payload.feature_recommendation_justification
+            ),
         )
 
     def score_from_dataset(
@@ -117,10 +133,12 @@ class FeatureScorer:
         comment_id: int,
         dataset_path: Path | str = DEFAULT_DATASET_PATH,
     ) -> ScoringOutput:
+        """Score one item from a scoring dataset."""
         dataset_item = get_scoring_dataset_item(comment_id, dataset_path)
         return self.score(dataset_item)
 
     def _build_default_llm(self) -> Any:
+        """Build the default OpenAI chat model from environment variables."""
         try:
             from dotenv import load_dotenv
 
@@ -141,7 +159,8 @@ class FeatureScorer:
             from langchain_openai import ChatOpenAI
         except ImportError as exc:
             raise RuntimeError(
-                "The langchain-openai package is required. Install dependencies with `uv sync`."
+                "The langchain-openai package is required. "
+                "Install dependencies with `uv sync`."
             ) from exc
 
         return ChatOpenAI(
@@ -154,6 +173,7 @@ class FeatureScorer:
 def load_scoring_dataset(
     dataset_path: Path | str = DEFAULT_DATASET_PATH,
 ) -> list[ScoringInput]:
+    """Load scoring input items from a JSON dataset."""
     path = Path(dataset_path)
     with path.open(encoding="utf-8") as dataset_file:
         raw_items = json.load(dataset_file)
@@ -165,6 +185,7 @@ def get_scoring_dataset_item(
     comment_id: int,
     dataset_path: Path | str = DEFAULT_DATASET_PATH,
 ) -> ScoringInput:
+    """Return one scoring dataset item by comment id."""
     for item in load_scoring_dataset(dataset_path):
         if item.id == comment_id:
             return item
@@ -177,6 +198,7 @@ def score_feature_from_dataset(
     dataset_path: Path | str = DEFAULT_DATASET_PATH,
     llm: Any | None = None,
 ) -> ScoringOutput:
+    """Convenience wrapper for scoring one dataset item."""
     scorer = FeatureScorer(llm=llm)
     return scorer.score_from_dataset(comment_id, dataset_path)
 
@@ -186,6 +208,7 @@ def _build_scoring_prompt(
     feature_priority_score: float,
     moscow_category_result: MoscowCategory,
 ) -> str:
+    """Build the JSON payload sent to the scoring prompt."""
     input_payload = {
         "id": scoring_input.id,
         "user": scoring_input.user,
@@ -208,6 +231,7 @@ def _build_scoring_prompt(
 
 
 def _parse_dataset_item(item: dict[str, Any]) -> ScoringInput:
+    """Convert a raw dataset row into a scoring input."""
     input_payload = item.get("input", item)
     return ScoringInput(
         id=int(item["id"]),
@@ -221,6 +245,7 @@ def _parse_dataset_item(item: dict[str, Any]) -> ScoringInput:
 
 
 def _calculate_feature_priority_score(scoring_input: ScoringInput) -> float:
+    """Calculate weighted feature priority from impact and urgency."""
     return round(
         FEATURE_PRIORITY_IMPACT_WEIGHT * int(scoring_input.impact)
         + FEATURE_PRIORITY_URGENCY_WEIGHT * int(scoring_input.urgency),
@@ -231,6 +256,7 @@ def _calculate_feature_priority_score(scoring_input: ScoringInput) -> float:
 def _calculate_moscow_category_result(
     feature_priority_score: float,
 ) -> MoscowCategory:
+    """Map a feature priority score to a MoSCoW category."""
     if feature_priority_score >= 4.5:
         return "Must have"
     if feature_priority_score >= 3.5:
@@ -242,6 +268,7 @@ def _calculate_moscow_category_result(
 
 
 def _parse_evaluation_score(value: Any) -> EvaluationScore:
+    """Validate and cast a raw value to an evaluation score literal."""
     score = str(value)
     if score not in {"1", "2", "3", "4", "5"}:
         raise ValueError(f"Invalid evaluation score: {value}.")

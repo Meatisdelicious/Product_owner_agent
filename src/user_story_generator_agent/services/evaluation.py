@@ -30,12 +30,15 @@ Return only JSON with:
 - urgency: one of "1", "2", "3", "4", "5"
 
 Use the provided impact criteria and urgency criteria exactly as the scoring scale.
-Do not add justifications, prioritization scores, MoSCoW categories, user stories, or explanations.
+Do not add justifications, prioritization scores, MoSCoW categories,
+user stories, or explanations.
 """
 
 
 @dataclass(frozen=True)
 class EvaluationInput:
+    """Feature and source feedback passed to the evaluator agent."""
+
     id: int
     user: str
     comment: str
@@ -45,6 +48,8 @@ class EvaluationInput:
 
 @dataclass(frozen=True)
 class EvaluationOutput:
+    """Impact and urgency scores returned by Agent 2.1."""
+
     impact: EvaluationScore
     urgency: EvaluationScore
 
@@ -67,6 +72,8 @@ EVALUATION_PROMPT = ChatPromptTemplate.from_messages(
 
 
 class FeatureEvaluator:
+    """Evaluate feature impact and urgency using configured criteria."""
+
     def __init__(self, llm: Any | None = None) -> None:
         self.llm = llm or self._build_default_llm()
         self.chain = EVALUATION_PROMPT | self.llm.with_structured_output(
@@ -74,6 +81,7 @@ class FeatureEvaluator:
         )
 
     def evaluate(self, evaluation_input: EvaluationInput) -> EvaluationOutput:
+        """Score one extracted feature for impact and urgency."""
         payload = self.chain.invoke(
             {"payload": _build_evaluation_prompt(evaluation_input)}
         )
@@ -87,10 +95,12 @@ class FeatureEvaluator:
         comment_id: int,
         dataset_path: Path | str = DEFAULT_DATASET_PATH,
     ) -> EvaluationOutput:
+        """Evaluate one item from an evaluation dataset."""
         dataset_item = get_evaluation_dataset_item(comment_id, dataset_path)
         return self.evaluate(dataset_item)
 
     def _build_default_llm(self) -> Any:
+        """Build the default OpenAI chat model from environment variables."""
         try:
             from dotenv import load_dotenv
 
@@ -111,7 +121,8 @@ class FeatureEvaluator:
             from langchain_openai import ChatOpenAI
         except ImportError as exc:
             raise RuntimeError(
-                "The langchain-openai package is required. Install dependencies with `uv sync`."
+                "The langchain-openai package is required. "
+                "Install dependencies with `uv sync`."
             ) from exc
 
         return ChatOpenAI(
@@ -124,6 +135,7 @@ class FeatureEvaluator:
 def load_evaluation_dataset(
     dataset_path: Path | str = DEFAULT_DATASET_PATH,
 ) -> list[EvaluationInput]:
+    """Load evaluation input items from a JSON dataset."""
     path = Path(dataset_path)
     with path.open(encoding="utf-8") as dataset_file:
         raw_items = json.load(dataset_file)
@@ -135,6 +147,7 @@ def get_evaluation_dataset_item(
     comment_id: int,
     dataset_path: Path | str = DEFAULT_DATASET_PATH,
 ) -> EvaluationInput:
+    """Return one evaluation dataset item by comment id."""
     for item in load_evaluation_dataset(dataset_path):
         if item.id == comment_id:
             return item
@@ -147,11 +160,13 @@ def evaluate_feature_from_dataset(
     dataset_path: Path | str = DEFAULT_DATASET_PATH,
     llm: Any | None = None,
 ) -> EvaluationOutput:
+    """Convenience wrapper for evaluating one dataset item."""
     evaluator = FeatureEvaluator(llm=llm)
     return evaluator.evaluate_from_dataset(comment_id, dataset_path)
 
 
 def _build_evaluation_prompt(evaluation_input: EvaluationInput) -> str:
+    """Build the JSON payload sent to the evaluator prompt."""
     input_payload = {
         "id": evaluation_input.id,
         "user": evaluation_input.user,
@@ -170,6 +185,7 @@ def _build_evaluation_prompt(evaluation_input: EvaluationInput) -> str:
 
 
 def _parse_dataset_item(item: dict[str, Any]) -> EvaluationInput:
+    """Convert a raw dataset row into an evaluation input."""
     input_payload = item.get("input", item)
     feature_payload = (
         input_payload
@@ -184,4 +200,3 @@ def _parse_dataset_item(item: dict[str, Any]) -> EvaluationInput:
         feature_type=str(feature_payload["feature_type"]),
         feature=str(feature_payload["feature"]),
     )
-

@@ -34,6 +34,8 @@ from user_story_generator_agent.services.user_story import (
 
 @dataclass(frozen=True)
 class FeedbackInput:
+    """Raw feedback submitted to the full Product Owner pipeline."""
+
     id: int
     user: str
     comment: str
@@ -41,6 +43,8 @@ class FeedbackInput:
 
 @dataclass(frozen=True)
 class ProductOwnerOutput:
+    """Combined output produced by the full Product Owner pipeline."""
+
     feature_type: str
     feature: str
     impact: str
@@ -57,6 +61,8 @@ class ProductOwnerOutput:
 
 
 class ProductOwnerAgent:
+    """Coordinate feature extraction, evaluation, scoring, and story writing."""
+
     def __init__(
         self,
         extractor: FeatureExtractor | None = None,
@@ -70,6 +76,7 @@ class ProductOwnerAgent:
         self.writer = writer or UserStoryWriter()
 
     def analyze(self, feedback: FeedbackInput) -> ProductOwnerOutput:
+        """Run the full Product Owner pipeline for one feedback comment."""
         extraction = self.extractor.extract(feedback.comment)
         evaluation = self._evaluate_feature(feedback, extraction)
         scoring = self._score_feature(feedback, extraction, evaluation)
@@ -100,6 +107,7 @@ class ProductOwnerAgent:
         feedback: FeedbackInput,
         extraction: ExtractorOutput,
     ) -> EvaluationOutput:
+        """Evaluate impact and urgency for the extracted feature."""
         return self.evaluator.evaluate(
             EvaluationInput(
                 id=feedback.id,
@@ -116,6 +124,7 @@ class ProductOwnerAgent:
         extraction: ExtractorOutput,
         evaluation: EvaluationOutput,
     ) -> ScoringOutput:
+        """Create priority scoring and justifications for the feature."""
         return self.scorer.score(
             ScoringInput(
                 id=feedback.id,
@@ -135,6 +144,7 @@ class ProductOwnerAgent:
         evaluation: EvaluationOutput,
         scoring: ScoringOutput,
     ) -> UserStoryOutput:
+        """Write the user story and acceptance criteria for the feature."""
         return self.writer.write(
             UserStoryInput(
                 id=feedback.id,
@@ -155,6 +165,7 @@ def analyze_feedback(
     feedback: FeedbackInput,
     agent: ProductOwnerAgent | None = None,
 ) -> ProductOwnerOutput:
+    """Run the full pipeline with an optional preconfigured agent."""
     product_owner_agent = agent or ProductOwnerAgent()
     return product_owner_agent.analyze(feedback)
 
@@ -164,6 +175,7 @@ def analyze_feedback_from_dataset(
     dataset_path: Path | str = DEFAULT_FEEDBACK_DATASET_PATH,
     agent: ProductOwnerAgent | None = None,
 ) -> ProductOwnerOutput:
+    """Run the full pipeline for one feedback item from a dataset."""
     dataset_item = get_dataset_item(comment_id, dataset_path)
     return analyze_feedback(
         FeedbackInput(
@@ -176,9 +188,9 @@ def analyze_feedback_from_dataset(
 
 
 def build_feedback_input(payload: dict[str, Any]) -> FeedbackInput:
+    """Build a feedback input object from a dictionary payload."""
     return FeedbackInput(
         id=int(payload["id"]),
         user=str(payload["user"]),
         comment=str(payload["comment"]),
     )
-

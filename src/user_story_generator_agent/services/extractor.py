@@ -34,6 +34,8 @@ DEFAULT_DATASET_PATH = PROJECT_ROOT / "1_Data" / "agent_1_dataset.json"
 
 @dataclass(frozen=True)
 class ExtractorInput:
+    """Raw feedback item used by the feature extractor."""
+
     id: int
     user: str
     comment: str
@@ -41,6 +43,8 @@ class ExtractorInput:
 
 @dataclass(frozen=True)
 class ExtractorOutput:
+    """Feature extraction result returned by Agent 1."""
+
     feature_type: FeatureType
     feature: str
 
@@ -61,6 +65,8 @@ EXTRACTOR_PROMPT = ChatPromptTemplate.from_messages(
 
 
 class FeatureExtractor:
+    """Extract a product feature and feature type from user feedback."""
+
     def __init__(self, llm: Any | None = None) -> None:
         self.llm = llm or self._build_default_llm()
         self.chain = EXTRACTOR_PROMPT | self.llm.with_structured_output(
@@ -68,6 +74,7 @@ class FeatureExtractor:
         )
 
     def extract(self, comment: str) -> ExtractorOutput:
+        """Extract a feature description from one feedback comment."""
         payload = self.chain.invoke({"comment": comment})
         return ExtractorOutput(
             feature_type=payload.feature_type,
@@ -79,10 +86,12 @@ class FeatureExtractor:
         comment_id: int,
         dataset_path: Path | str = DEFAULT_DATASET_PATH,
     ) -> ExtractorOutput:
+        """Extract a feature from one item in an extractor dataset."""
         dataset_item = get_dataset_item(comment_id, dataset_path)
         return self.extract(dataset_item.comment)
 
     def _build_default_llm(self) -> Any:
+        """Build the default OpenAI chat model from environment variables."""
         try:
             from dotenv import load_dotenv
 
@@ -103,7 +112,8 @@ class FeatureExtractor:
             from langchain_openai import ChatOpenAI
         except ImportError as exc:
             raise RuntimeError(
-                "The langchain-openai package is required. Install dependencies with `uv sync`."
+                "The langchain-openai package is required. "
+                "Install dependencies with `uv sync`."
             ) from exc
 
         return ChatOpenAI(
@@ -116,6 +126,7 @@ class FeatureExtractor:
 def load_comments_dataset(
     dataset_path: Path | str = DEFAULT_DATASET_PATH,
 ) -> list[ExtractorInput]:
+    """Load extractor input items from a JSON dataset."""
     path = Path(dataset_path)
     with path.open(encoding="utf-8") as dataset_file:
         raw_items = json.load(dataset_file)
@@ -127,6 +138,7 @@ def get_dataset_item(
     comment_id: int,
     dataset_path: Path | str = DEFAULT_DATASET_PATH,
 ) -> ExtractorInput:
+    """Return one extractor dataset item by comment id."""
     for item in load_comments_dataset(dataset_path):
         if item.id == comment_id:
             return item
@@ -139,11 +151,13 @@ def extract_feature_from_dataset(
     dataset_path: Path | str = DEFAULT_DATASET_PATH,
     llm: Any | None = None,
 ) -> ExtractorOutput:
+    """Convenience wrapper for extracting one dataset item."""
     extractor = FeatureExtractor(llm=llm)
     return extractor.extract_from_dataset(comment_id, dataset_path)
 
 
 def _parse_dataset_item(item: dict[str, Any]) -> ExtractorInput:
+    """Convert a raw dataset row into an extractor input."""
     input_payload = item.get("input", item)
     return ExtractorInput(
         id=int(item["id"]),

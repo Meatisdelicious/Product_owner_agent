@@ -9,8 +9,9 @@ from pathlib import Path
 # Commands to run the file:
 # python tests/inference/inference_full_pipeline.py
 
-# example input string : 
-# We need role-based permissions because managing access across large teams is risky right now. Admin control is not granular enough.
+# Example input string:
+# We need role-based permissions because managing access across large teams is
+# risky right now. Admin control is not granular enough.
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 SRC_PATH = PROJECT_ROOT / "src"

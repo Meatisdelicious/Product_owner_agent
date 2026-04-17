@@ -54,7 +54,9 @@ As a [user type], I want [feature], so that [impact and urgency outcome].
 
 Return only JSON with:
 - user_story: one concise user story following the template
-- complexity_factors: object with backend_changes, frontend_changes, data_model_changes, security_constraints, and integration_dependencies, each as 0 or 1
+- complexity_factors: object with backend_changes, frontend_changes,
+  data_model_changes, security_constraints, and integration_dependencies,
+  each as 0 or 1
 - feature_acceptance_criteria: JSON array of exactly 3 strings
 
 Use the feature, impact, urgency, and feature_recommendation_justification as context.
@@ -65,6 +67,8 @@ Do not add prioritization scores or explanations.
 
 @dataclass(frozen=True)
 class UserStoryInput:
+    """Prioritized feature context passed to the user story writer."""
+
     id: int
     user: str
     comment: str
@@ -77,6 +81,8 @@ class UserStoryInput:
 
 @dataclass(frozen=True)
 class UserStoryOutput:
+    """User story, acceptance criteria, and complexity estimate from Agent 3."""
+
     user_story: str
     complexity_factors: ComplexityFactors
     development_complexity_estimation: DevelopmentComplexity
@@ -85,6 +91,8 @@ class UserStoryOutput:
 
 @dataclass(frozen=True)
 class ComplexityFactors:
+    """Binary indicators used to estimate development complexity."""
+
     backend_changes: ComplexityFlag
     frontend_changes: ComplexityFlag
     data_model_changes: ComplexityFlag
@@ -146,6 +154,8 @@ USER_STORY_PROMPT = ChatPromptTemplate.from_messages(
 
 
 class UserStoryWriter:
+    """Generate user stories, acceptance criteria, and complexity factors."""
+
     def __init__(self, llm: Any | None = None) -> None:
         self.llm = llm or self._build_default_llm()
         self.chain = USER_STORY_PROMPT | self.llm.with_structured_output(
@@ -153,6 +163,7 @@ class UserStoryWriter:
         )
 
     def write(self, user_story_input: UserStoryInput) -> UserStoryOutput:
+        """Write one user story output from prioritized feature context."""
         payload = self.chain.invoke(
             {"payload": _build_user_story_prompt(user_story_input)}
         )
@@ -161,7 +172,9 @@ class UserStoryWriter:
             frontend_changes=payload.complexity_factors.frontend_changes,
             data_model_changes=payload.complexity_factors.data_model_changes,
             security_constraints=payload.complexity_factors.security_constraints,
-            integration_dependencies=payload.complexity_factors.integration_dependencies,
+            integration_dependencies=(
+                payload.complexity_factors.integration_dependencies
+            ),
         )
         return UserStoryOutput(
             user_story=payload.user_story,
@@ -177,10 +190,12 @@ class UserStoryWriter:
         comment_id: int,
         dataset_path: Path | str = DEFAULT_DATASET_PATH,
     ) -> UserStoryOutput:
+        """Write a user story from one item in a user story dataset."""
         dataset_item = get_user_story_dataset_item(comment_id, dataset_path)
         return self.write(dataset_item)
 
     def _build_default_llm(self) -> Any:
+        """Build the default OpenAI chat model from environment variables."""
         try:
             from dotenv import load_dotenv
 
@@ -201,7 +216,8 @@ class UserStoryWriter:
             from langchain_openai import ChatOpenAI
         except ImportError as exc:
             raise RuntimeError(
-                "The langchain-openai package is required. Install dependencies with `uv sync`."
+                "The langchain-openai package is required. "
+                "Install dependencies with `uv sync`."
             ) from exc
 
         return ChatOpenAI(
@@ -214,6 +230,7 @@ class UserStoryWriter:
 def load_user_story_dataset(
     dataset_path: Path | str = DEFAULT_DATASET_PATH,
 ) -> list[UserStoryInput]:
+    """Load user story input items from a JSON dataset."""
     path = Path(dataset_path)
     with path.open(encoding="utf-8") as dataset_file:
         raw_items = json.load(dataset_file)
@@ -225,6 +242,7 @@ def get_user_story_dataset_item(
     comment_id: int,
     dataset_path: Path | str = DEFAULT_DATASET_PATH,
 ) -> UserStoryInput:
+    """Return one user story dataset item by comment id."""
     for item in load_user_story_dataset(dataset_path):
         if item.id == comment_id:
             return item
@@ -237,11 +255,13 @@ def write_user_story_from_dataset(
     dataset_path: Path | str = DEFAULT_DATASET_PATH,
     llm: Any | None = None,
 ) -> UserStoryOutput:
+    """Convenience wrapper for writing one dataset item."""
     writer = UserStoryWriter(llm=llm)
     return writer.write_from_dataset(comment_id, dataset_path)
 
 
 def _build_user_story_prompt(user_story_input: UserStoryInput) -> str:
+    """Build the JSON payload sent to the user story prompt."""
     input_payload = {
         "id": user_story_input.id,
         "user": user_story_input.user,
@@ -266,6 +286,7 @@ def _build_user_story_prompt(user_story_input: UserStoryInput) -> str:
 
 
 def _parse_dataset_item(item: dict[str, Any]) -> UserStoryInput:
+    """Convert a raw dataset row into a user story input."""
     input_payload = item.get("input", item)
     return UserStoryInput(
         id=int(item["id"]),
@@ -282,6 +303,7 @@ def _parse_dataset_item(item: dict[str, Any]) -> UserStoryInput:
 
 
 def _parse_evaluation_score(value: Any) -> EvaluationScore:
+    """Validate and cast a raw value to an evaluation score literal."""
     score = str(value)
     if score not in {"1", "2", "3", "4", "5"}:
         raise ValueError(f"Invalid evaluation score: {value}.")
@@ -292,6 +314,7 @@ def _parse_evaluation_score(value: Any) -> EvaluationScore:
 def _calculate_development_complexity_estimation(
     complexity_factors: ComplexityFactors,
 ) -> DevelopmentComplexity:
+    """Estimate development complexity from enabled complexity factors."""
     factor_count = (
         complexity_factors.backend_changes
         + complexity_factors.frontend_changes
