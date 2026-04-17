@@ -134,22 +134,21 @@ Metrics on the dataset with 30 comment/expected-output pairs:
 ## Project Structure
 
 ```text
-1_Data/
-  Datasets used for examples and evaluation
-
-2_documentation/
-  Architecture diagrams and technical notes
-
-src/user_story_generator_agent/
-  context/
-    Scoring and complexity criteria
-  services/
-    Core agent pipeline
-  ui/
-    Streamlit application
-
-tests/
-  Inference scripts and evaluation helpers
+Product_owner_agent/
+├── 1_Data/
+│   └── readme_imgs/
+├── 2_documentation/
+│   ├── architecture_diagrams/
+│   └── technical_documentation/
+├── src/
+│   └── user_story_generator_agent/
+│       ├── context/
+│       ├── services/
+│       └── ui/
+└── tests/
+    ├── evaluation/
+    ├── inference/
+    └── unit_tests/
 ```
 
 ## Model Output
