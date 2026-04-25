@@ -1,3 +1,5 @@
+"""Shared pytest configuration for unit and pipeline tests."""
+
 from __future__ import annotations
 
 import sys
@@ -9,5 +11,5 @@ SRC_PATH = PROJECT_ROOT / "src"
 
 sys.path.insert(0, str(SRC_PATH))
 
-# to run unit test : 
+# To run all unit tests:
 # uv run pytest tests/unit_tests
