@@ -58,8 +58,3 @@ Feel free to contact us for clarifications.
 
 
 **Happy coding!**
-
-
-
-
-
