@@ -1,14 +1,17 @@
 from __future__ import annotations
+
 from dataclasses import asdict
 import html
 from pathlib import Path
 import sys
+
 import streamlit as st
 
 
-# command to start the streamlit app : 
-# uv run streamlit run src/user_story_generator_agent/ui/streamlit_app.py --server.headless true --server.port 8501
+# Commands to start the Streamlit app:
 # uv run streamlit run src/user_story_generator_agent/ui/streamlit_app.py
+# uv run streamlit run src/user_story_generator_agent/ui/streamlit_app.py \
+#     --server.headless true --server.port 8501
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
@@ -29,10 +32,12 @@ EXAMPLE_COMMENT = (
 
 @st.cache_resource
 def _get_agent() -> ProductOwnerAgent:
+    """Return a cached product owner agent for Streamlit reruns."""
     return ProductOwnerAgent()
 
 
 def main() -> None:
+    """Render the Streamlit app and run the analysis pipeline on demand."""
     st.set_page_config(
         page_title="Product Owner Agent",
         layout="wide",
@@ -173,10 +178,13 @@ def main() -> None:
 
 
 def _render_output(output: dict[str, object]) -> None:
+    """Render the full product owner analysis output."""
     st.markdown("<h3><u>Feature Analysis</u></h3>", unsafe_allow_html=True)
     feature_col, type_col = st.columns(2)
     feature_col.markdown(f"**Feature :** {html.escape(str(output['feature']))}")
-    type_col.markdown(f"**Feature type :** {html.escape(str(output['feature_type']))}")
+    type_col.markdown(
+        f"**Feature type :** {html.escape(str(output['feature_type']))}"
+    )
 
     priority_col, complexity_col = st.columns(2)
     with priority_col:
