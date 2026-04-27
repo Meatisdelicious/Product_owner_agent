@@ -161,7 +161,7 @@ def _evaluate_acceptance_criteria(criteria: list[str]) -> dict[str, Any]:
 
 
 def _print_report(results: list[dict[str, Any]]) -> None:
-    """Print aggregate evaluation metrics and failure details."""
+    """Print evaluation metrics and failure details."""
     total = len(results)
     print("Full Pipeline Evaluation :")
     print("-------------------------")
